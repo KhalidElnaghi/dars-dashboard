@@ -1,11 +1,13 @@
-import i18n from 'src/locales/i18n';
+import { useLocale } from 'next-intl';
 
 export function getNameKeyLang(): 'name_en' | 'name_ar' {
-  return i18n.language === 'en' ? 'name_en' : 'name_ar';
+  const local = useLocale();
+  return local === 'en' ? 'name_en' : 'name_ar';
 }
 
 export function getCustomNameKeyLang(enKey:string,arKey:string){
-  return i18n.language === 'en' ? enKey : arKey;
+  const local = useLocale();
+  return local === 'en' ? enKey : arKey;
 }
 
 

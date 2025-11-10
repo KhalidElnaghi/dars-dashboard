@@ -3,6 +3,7 @@ import { memo, useState, useCallback } from 'react';
 import Stack from '@mui/material/Stack';
 import Collapse from '@mui/material/Collapse';
 import ListSubheader from '@mui/material/ListSubheader';
+import { Theme } from '@mui/material/styles';
 
 import NavList from './nav-list';
 import { NavProps, NavGroupProps } from '../types';
@@ -53,8 +54,8 @@ function Group({ subheader, items, slotProps }: NavGroupProps) {
               display: 'inline-flex',
               color: 'text.disabled',
               mb: `${slotProps?.gap || 4}px`,
-              p: (theme) => theme.spacing(2, 1, 1, 1.5),
-              transition: (theme) =>
+              p: (theme: Theme) => theme.spacing(2, 1, 1, 1.5),
+              transition: (theme: Theme) =>
                 theme.transitions.create(['color'], {
                   duration: theme.transitions.duration.shortest,
                 }),

@@ -1,7 +1,6 @@
-import { useDropzone } from 'react-dropzone';
-
 import Box from '@mui/material/Box';
-import { alpha } from '@mui/material/styles';
+import { useDropzone } from 'react-dropzone';
+import { alpha, Theme } from '@mui/material/styles';
 
 import Iconify from '../iconify';
 import { UploadProps } from './types';
@@ -30,8 +29,8 @@ export default function UploadBox({ placeholder, error, disabled, sx, ...other }
         alignItems: 'center',
         color: 'text.disabled',
         justifyContent: 'center',
-        bgcolor: (theme) => alpha(theme.palette.grey[500], 0.08),
-        border: (theme) => `dashed 1px ${alpha(theme.palette.grey[500], 0.16)}`,
+        bgcolor: (theme: Theme) => alpha(theme.palette.grey[500], 0.08),
+        border: (theme: Theme) => `dashed 1px ${alpha(theme.palette.grey[500], 0.16)}`,
         ...(isDragActive && {
           opacity: 0.72,
         }),
@@ -42,7 +41,7 @@ export default function UploadBox({ placeholder, error, disabled, sx, ...other }
         ...(hasError && {
           color: 'error.main',
           borderColor: 'error.main',
-          bgcolor: (theme) => alpha(theme.palette.error.main, 0.08),
+          bgcolor: (theme: Theme) => alpha(theme.palette.error.main, 0.08),
         }),
         '&:hover': {
           opacity: 0.72,

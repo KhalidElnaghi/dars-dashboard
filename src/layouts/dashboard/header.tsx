@@ -1,92 +1,70 @@
-/* eslint-disable no-nested-ternary */
-
-'use client';
-
-import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-
-import { useTheme } from '@mui/material/styles';
-import { Box, Stack, AppBar, Button, Toolbar, IconButton, Typography } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import { useTheme, Theme } from '@mui/material/styles';
 
 import { useResponsive } from 'src/hooks/use-responsive';
-import { useOffSetTop } from 'src/hooks/use-off-set-top';
 
 import { bgBlur } from 'src/theme/css';
 
-import SvgColor from 'src/components/svg-color';
 import { useSettingsContext } from 'src/components/settings';
 
-import { NAV, HEADER } from '../config-layout';
 import AccountPopover from '../common/account-popover';
-import SettingsButton from '../common/settings-button';
 import LanguagePopover from '../common/language-popover';
 
-type SubscriptionState = {
-  isInFreeTrial: boolean;
-  trialPeriodEndAt: string;
-  isSubscriptionActive: boolean;
+import { NAV, HEADER } from '../config-layout';
+
+// ----------------------------------------------------------------------
+
+type Props = {
+  onOpenNav?: VoidFunction;
 };
 
-export default function Header({ onOpenNav }: { onOpenNav?: VoidFunction }) {
+export default function Header({ onOpenNav }: Props) {
   const theme = useTheme();
   const settings = useSettingsContext();
-  const { t } = useTranslation();
+  const lgUp = useResponsive('up', 'lg');
+
   const isNavHorizontal = settings.themeLayout === 'horizontal';
   const isNavMini = settings.themeLayout === 'mini';
-  const lgUp = useResponsive('up', 'lg');
-  const offset = useOffSetTop(HEADER.H_DESKTOP);
-  const offsetTop = offset && !isNavHorizontal;
+
+  const offsetLeft = lgUp && !isNavHorizontal ? (isNavMini ? NAV.W_MINI : NAV.W_VERTICAL) : 0;
 
   return (
     <AppBar
+      position="fixed"
       sx={{
-        height: 'auto',
-        mb: 2,
-        zIndex: theme.zIndex.appBar + 1,
-        ...bgBlur({ color: theme.palette.background.default }),
-        transition: theme.transitions.create(['height'], {
+        height: HEADER.H_MOBILE,
+        zIndex: theme.zIndex.drawer - 1,
+        ...bgBlur({
+          color: theme.palette.background.default,
+        }),
+        transition: theme.transitions.create(['width', 'left'], {
           duration: theme.transitions.duration.shorter,
         }),
+        boxShadow: 'none',
+        borderBottom: (theme: Theme) => `1px solid ${theme.palette.divider}`,
         ...(lgUp && {
-          width: `calc(100% - ${NAV.W_VERTICAL + 1}px)`,
-          ...(offsetTop && { height: HEADER.H_DESKTOP_OFFSET }),
-          ...(isNavHorizontal && {
-            width: 1,
-            bgcolor: 'background.default',
-            borderBottom: `dashed 1px ${theme.palette.divider}`,
-          }),
-          ...(isNavMini && {
-            width: `calc(100% - ${NAV.W_MINI + 1}px)`,
-          }),
+          width: `calc(100% - ${offsetLeft}px)`,
+          left: offsetLeft,
         }),
       }}
     >
       <Toolbar
         sx={{
-          height: HEADER.H_MOBILE,
-          px: { lg: 5 },
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          height: 1,
+          px: { xs: 2, lg: 3 },
         }}
       >
-        {!lgUp && (
-          <IconButton onClick={onOpenNav}>
-            <SvgColor src="/assets/icons/navbar/ic_menu_item.svg" />
-          </IconButton>
-        )}
+        {/* Spacer to push items to the right */}
+        <Stack sx={{ flexGrow: 1 }} />
 
-        <Stack
-          direction="row"
-          alignItems="center"
-          spacing={{ xs: 0.5, sm: 1 }}
-          sx={{ marginLeft: 'auto' }}
-        >
+        <Stack direction="row" alignItems="center" spacing={1}>
           <LanguagePopover />
-          {/* <SettingsButton /> */}
           <AccountPopover />
         </Stack>
       </Toolbar>
     </AppBar>
   );
 }
+

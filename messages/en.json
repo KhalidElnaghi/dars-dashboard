@@ -1,0 +1,67 @@
+{
+  "Metadata": {
+    "Login": {
+      "title": "Login"
+    }
+  },
+  "Nav": {
+    "main": "Home"
+  },
+  "Title": {
+    "dars":"Dars",
+    "sign_in": "Sign In",
+    "verify_email": "Please verify your email!",
+    "reset_password": "Set a new password"
+  },
+  "Label": {
+    "forgot_password": "Forgot your password?",
+    "dont_have_account": "Don't have an account yet?",
+    "create_an_account": "Create an account",
+    "email_address": "Email address",
+    "return_to_sign_in": "Return to sign in",
+    "new_password": "New password",
+    "confirm_new_password": "Confirm new password",
+    "enter_code_again": "Enter a different code",
+    "logout": "Logout",
+    "password": "Password",
+    "email": "Email"
+  },
+  "Button": {
+    "send_request": "Send Request",
+    "update_password": "Update Password",
+    "resend_code": "Resend code",
+    "verify_code": "Verify code",
+    "sign_in": "Sign in"
+  },
+  "Form": {},
+  "Message": {
+    "Error": {
+      "unknown_error": "Unknown error",
+      "code_required": "Verification code is required",
+      "code_length": "Code must be 4 digits",
+      "password_min": "Password must be at least 6 characters",
+      "password_required": "Password is required",
+      "confirm_password_required": "Confirm password is required",
+      "passwords_must_match": "Passwords must match",
+      "password_must_be_at_least_8_characters_long": "Password must be at least 8 characters long",
+      "password_must_contain_at_least_one_digit": "Password must contain at least one digit",
+      "password_must_contain_at_least_one_lowercase_letter": "Password must contain at least one lowercase letter",
+      "password_must_contain_at_least_one_uppercase_letter": "Password must contain at least one uppercase letter",
+      "password_must_contain_at_least_one_special_character": "Password must contain at least one special character"
+    },
+    "Success": {
+      "code_resent": "Verification code sent again",
+      "password_reset": "Password updated successfully"
+    }
+  },
+  "Placeholder": {
+    "email_example": "Example@gmail.com"
+  },
+  "Description": {
+    "forgot_password": "Please enter the email address associated with your account and we will email you a secret key to reset your password.",
+    "verify_email_line1": "We have sent a 4-digit confirmation code to {email}.",
+    "verify_email_line2": "Please enter the code in the field below to verify your email.",
+    "no_code": "Didn't receive a code?",
+    "reset_password": "Please enter your new password below."
+  }
+}

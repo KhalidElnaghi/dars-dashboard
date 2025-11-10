@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import { alpha } from '@mui/material/styles';
+import { alpha, Theme } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
 
 import Iconify from '../../iconify';
@@ -21,11 +21,11 @@ export default function StretchOptions({ value, onChange }: Props) {
         height: 80,
         borderRadius: 1,
         color: 'text.disabled',
-        border: (theme) => `solid 1px ${alpha(theme.palette.grey[500], 0.08)}`,
+        border: (theme: Theme) => `solid 1px ${alpha(theme.palette.grey[500], 0.08)}`,
         ...(value && {
           bgcolor: 'background.paper',
-          color: (theme) => theme.palette.primary.main,
-          boxShadow: (theme) =>
+          color: (theme: Theme) => theme.palette.primary.main,
+          boxShadow: (theme: Theme) =>
             `-24px 8px 24px -4px ${alpha(
               theme.palette.mode === 'light' ? theme.palette.grey[500] : theme.palette.common.black,
               0.08
@@ -39,7 +39,7 @@ export default function StretchOptions({ value, onChange }: Props) {
         justifyContent="space-between"
         sx={{
           width: 0.24,
-          transition: (theme) => theme.transitions.create(['width']),
+          transition: (theme: Theme) => theme.transitions.create(['width']),
           ...(value && {
             width: 0.5,
           }),
@@ -48,7 +48,7 @@ export default function StretchOptions({ value, onChange }: Props) {
         <Iconify
           icon={value ? 'eva:arrow-ios-back-fill' : 'eva:arrow-ios-forward-fill'}
           sx={{
-            color: (theme) =>
+            color: (theme: Theme) =>
               `linear-gradient(135deg, ${theme.palette.primary.light} 0%, ${theme.palette.primary.main} 100%)`,
           }}
         />
@@ -58,7 +58,7 @@ export default function StretchOptions({ value, onChange }: Props) {
         <Iconify
           icon={value ? 'eva:arrow-ios-forward-fill' : 'eva:arrow-ios-back-fill'}
           sx={{
-            color: (theme) =>
+            color: (theme: Theme) =>
               `linear-gradient(135deg, ${theme.palette.primary.light} 0%, ${theme.palette.primary.main} 100%)`,
           }}
         />

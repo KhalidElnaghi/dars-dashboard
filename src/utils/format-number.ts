@@ -1,6 +1,10 @@
-import i18n from 'src/locales/i18n';
-import { useLocales as getLocales } from 'src/locales';
 // ----------------------------------------------------------------------
+
+import { useLocale } from 'next-intl';
+import { getLocale } from 'next-intl/server';
+import { LocaleType, localesSettings } from 'src/i18n/config-locale';
+
+import { useCurrentLocale } from './locale-utils';
 
 /*
  * Locales code
@@ -11,14 +15,12 @@ type InputValue = string | number | null;
 
 function getLocaleCode() {
   const {
-    currentLang: {
-      numberFormat: { code, currency },
-    },
-  } = getLocales();
+    numberFormat: { code, currency },
+  } = useCurrentLocale();
 
   return {
-    code: code ?? 'ar-YE',
-    currency: currency ?? 'YER',
+    code: code ?? 'en-US',
+    currency: currency ?? 'USD',
   };
 }
 
@@ -27,15 +29,8 @@ function getLocaleCode() {
 export function fNumber(inputValue: InputValue) {
   const { code } = getLocaleCode();
 
-  if (!inputValue) {
-    const number = Number(inputValue);
-    const fm = new Intl.NumberFormat(code, {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(number);
+  if (!inputValue) return '';
 
-    return fm;
-  }
   const number = Number(inputValue);
 
   const fm = new Intl.NumberFormat(code, {
@@ -55,17 +50,58 @@ export function fCurrency(inputValue: InputValue) {
 
   const number = Number(inputValue);
 
-  let fm = new Intl.NumberFormat(i18n?.language === 'en' ? 'en-US' : 'ar-SA', {
+  const fm = new Intl.NumberFormat(code, {
     style: 'currency',
-    currency: 'SAR',
+    currency,
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   }).format(number);
-  if (i18n?.language === 'en') {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions, prefer-template
-    fm = fm.replace('SAR', '') + ' SAR';
-  }
+
   return fm;
+}
+
+// ----------------------------------------------------------------------
+
+export function useCurrency() {
+  const locale = useLocale() as LocaleType;
+  const { currency } = localesSettings[locale];
+
+  const formater = (inputValue: InputValue, currencyCode = true) => {
+    // if (!inputValue) return '';
+
+    const number = Number(inputValue);
+
+    const fm = new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(number);
+
+    return currencyCode ? `${fm} ${currency}` : fm;
+  };
+
+  return formater;
+}
+
+// ----------------------------------------------------------------------
+
+export async function getCurrency() {
+  const locale = (await getLocale()) as LocaleType;
+  const { currency } = localesSettings[locale];
+
+  const formater = (inputValue: InputValue, currencyCode = true) => {
+    if (!inputValue) return '';
+
+    const number = Number(inputValue);
+
+    const fm = new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(number);
+
+    return currencyCode ? `${fm} ${currency}` : fm;
+  };
+
+  return formater;
 }
 
 // ----------------------------------------------------------------------

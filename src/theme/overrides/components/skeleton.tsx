@@ -10,7 +10,7 @@ export function skeleton(theme: Theme) {
           backgroundColor: theme.palette.background.neutral,
         },
         rounded: {
-          borderRadius: theme.shape.borderRadius * 2,
+          borderRadius: (theme.shape.borderRadius as number) * 2,
         },
       },
     },

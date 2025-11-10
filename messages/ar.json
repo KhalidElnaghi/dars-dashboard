@@ -1,0 +1,67 @@
+{
+  "Metadata": {
+    "Login": {
+      "title": "تسجيل الدخول"
+    }
+  },
+  "Nav": {
+    "main": "الرئيسية"
+  },
+  "Title": {
+    "dars": "درس",
+    "sign_in": "تسجيل الدخول",
+    "verify_email": "يرجى التحقق من بريدك الإلكتروني!",
+    "reset_password": "تعيين كلمة مرور جديدة"
+  },
+  "Label": {
+    "forgot_password": "نسيت كلمة المرور؟",
+    "dont_have_account": "ليس لديك حساب؟",
+    "create_an_account": "انشئ حساب",
+    "email_address": "البريد الإلكتروني",
+    "return_to_sign_in": "العودة لتسجيل الدخول",
+    "new_password": "كلمة المرور الجديدة",
+    "confirm_new_password": "تأكيد كلمة المرور الجديدة",
+    "enter_code_again": "إدخال رمز مختلف",
+    "logout": "تسجيل الخروج",
+    "password": "كلمة المرور",
+    "email": "البريد الإلكتروني"
+  },
+  "Button": {
+    "send_request": "إرسال",
+    "update_password": "تحديث كلمة المرور",
+    "resend_code": "إعادة إرسال الرمز",
+    "verify_code": "تحقق من الرمز",
+    "sign_in": "تسجيل الدخول"
+  },
+  "Form": {},
+  "Message": {
+    "Error": {
+      "unknown_error": "خطأ غير معروف",
+      "code_required": "رمز التحقق مطلوب",
+      "code_length": "يجب أن يتكون الرمز من 4 أرقام",
+      "password_min": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+      "password_required": "كلمة المرور مطلوبة",
+      "confirm_password_required": "تأكيد كلمة المرور مطلوب",
+      "passwords_must_match": "يجب أن تتطابق كلمات المرور",
+      "password_must_be_at_least_8_characters_long": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+      "password_must_contain_at_least_one_digit": "يجب أن تتكون كلمة المرور من رقم واحد على الأقل",
+      "password_must_contain_at_least_one_lowercase_letter": "يجب أن تتكون كلمة المرور من حرف صغير واحد على الأقل",
+      "password_must_contain_at_least_one_uppercase_letter": "يجب أن تتكون كلمة المرور من حرف كبير واحد على الأقل",
+      "password_must_contain_at_least_one_special_character": "يجب أن تتكون كلمة المرور من حرف خاص واحد على الأقل"
+    },
+    "Success": {
+      "code_resent": "تم إرسال رمز التحقق مرة أخرى",
+      "password_reset": "تم تحديث كلمة المرور بنجاح"
+    }
+  },
+  "Placeholder": {
+    "email_example": "Example@gmail.com"
+  },
+  "Description": {
+    "forgot_password": "الرجاء إدخال عنوان البريد الإلكتروني المرتبط بحسابك، وسنرسل إليك عبر البريد الإلكتروني رمزًا لإعادة تعيين كلمة المرور الخاصة بك.",
+    "verify_email_line1": "لقد أرسلنا رمز تأكيد مكوّنًا من 4 أرقام إلى {email}.",
+    "verify_email_line2": "يرجى إدخال الرمز في الحقول أدناه للتحقق من بريدك الإلكتروني.",
+    "no_code": "لم تتلقَّ رمزًا؟",
+    "reset_password": "يرجى إدخال كلمة المرور الجديدة أدناه."
+  }
+}

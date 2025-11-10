@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
-import { alpha } from '@mui/material/styles';
+import { alpha, Theme } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -15,7 +15,7 @@ import { useAuthContext } from 'src/auth/hooks';
 
 import { varHover } from 'src/components/animate';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from 'next-intl';
 import { getCurrentUser } from 'src/utils/getCurrentUser';
 import { paths } from 'src/routes/paths';
 
@@ -37,7 +37,7 @@ const OPTIONS = [
 export default function AccountPopover() {
   const user = getCurrentUser();
   const router = useRouter();
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const { logout } = useAuthContext();
 
@@ -47,7 +47,7 @@ export default function AccountPopover() {
     try {
       await logout();
       popover.onClose();
-      window.location.href = paths.auth.jwt.login;
+      router.replace(paths.auth.jwt.login);
     } catch (error) {
       console.error(error);
     }
@@ -69,9 +69,9 @@ export default function AccountPopover() {
         sx={{
           width: 40,
           height: 40,
-          background: (theme) => alpha(theme.palette.grey[500], 0.08),
+          background: (theme: Theme) => alpha(theme.palette.grey[500], 0.08),
           ...(popover.open && {
-            background: (theme) =>
+            background: (theme: Theme) =>
               `linear-gradient(135deg, ${theme.palette.primary.light} 0%, ${theme.palette.primary.main} 100%)`,
           }),
         }}
@@ -116,7 +116,7 @@ export default function AccountPopover() {
           onClick={handleLogout}
           sx={{ m: 1, fontWeight: 'fontWeightBold', color: 'error.main' }}
         >
-          {t('Logout')}
+          {t('Label.logout')}
         </MenuItem>
       </CustomPopover>
     </>

@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { Dayjs } from 'dayjs';
 
 import { fDate } from 'src/utils/format-time';
 
@@ -9,14 +10,14 @@ import { DateRangePickerProps } from './types';
 
 type ReturnType = DateRangePickerProps;
 
-export default function useDateRangePicker(start: Date | null, end: Date | null): ReturnType {
+export default function useDateRangePicker(start: Dayjs | null, end: Dayjs | null): ReturnType {
   const [open, setOpen] = useState(false);
 
   const [endDate, setEndDate] = useState(end);
 
   const [startDate, setStartDate] = useState(start);
 
-  const error = start && end ? new Date(start).getTime() > new Date(end).getTime() : false;
+  const error = start && end ? start.valueOf() > end.valueOf() : false;
 
   const onOpen = useCallback(() => {
     setOpen(true);
@@ -26,12 +27,12 @@ export default function useDateRangePicker(start: Date | null, end: Date | null)
     setOpen(false);
   }, []);
 
-  const onChangeStartDate = useCallback((newValue: Date | null) => {
+  const onChangeStartDate = useCallback((newValue: Dayjs | null) => {
     setStartDate(newValue);
   }, []);
 
   const onChangeEndDate = useCallback(
-    (newValue: Date | null) => {
+    (newValue: Dayjs | null) => {
       if (error) {
         setEndDate(null);
       }

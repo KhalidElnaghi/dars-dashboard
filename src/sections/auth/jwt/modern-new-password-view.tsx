@@ -24,12 +24,10 @@ import { RouterLink } from 'src/routes/components';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import i18n from 'src/locales/i18n';
-import { useTranslate } from 'src/locales';
-
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFCode, RHFTextField } from 'src/components/hook-form';
 import { ForgetPassword, ResetPassword } from 'src/actions/auth';
+import { useTranslations, useLocale } from 'next-intl';
 
 // ----------------------------------------------------------------------
 interface IProps {
@@ -37,7 +35,8 @@ interface IProps {
 }
 export default function ModernNewPasswordView({ email }: IProps) {
   const password = useBoolean();
-  const { t } = useTranslate();
+  const t = useTranslations();
+  const locale = useLocale();
   const { push } = useRouter();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -300,7 +299,7 @@ export default function ModernNewPasswordView({ email }: IProps) {
         sx={{
           alignItems: 'center',
           display: 'inline-flex',
-          flexDirection: i18n.language === 'ar' ? 'row-reverse' : 'row',
+          flexDirection: locale === 'ar' ? 'row-reverse' : 'row',
           gap: 0.5,
         }}
       >

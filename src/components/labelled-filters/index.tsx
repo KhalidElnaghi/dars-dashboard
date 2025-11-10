@@ -1,13 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslations, useLocale } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 
 import { Stack, Button } from '@mui/material';
 
 import { useQueryString } from 'src/hooks/use-queryString';
-
-import { useLocales } from 'src/locales';
 
 import Scrollbar from '../scrollbar';
 
@@ -22,8 +20,8 @@ export function LabelledFilters({
   enableDeselect?: boolean;
   defaultValue?: any;
 }) {
-  const { currentLang } = useLocales();
-  const { t } = useTranslation();
+  const locale = useLocale();
+  const t = useTranslations();
   const { createQueryString } = useQueryString();
   const searchParams = useSearchParams();
   const currentFilter = searchParams.get('filter') || 'all';
@@ -54,7 +52,7 @@ export function LabelledFilters({
             sx={{ whiteSpace: 'nowrap' }}
             size="small"
           >
-            {currentLang.value === 'ar' ? item.name_ar : item.name_en}
+            {locale === 'ar' ? item.name_ar : item.name_en}
           </Button>
         ))}
       </Stack>

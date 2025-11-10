@@ -1,17 +1,17 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from 'next-intl';
 import { Page, Text, View, Font, Document, StyleSheet } from '@react-pdf/renderer';
 
 Font.register({
   family: 'Amiri',
   fonts: [
     {
-      src: '/fonts/Amiri-Regular.ttf', 
+      src: '/fonts/Amiri-Regular.ttf',
       fontWeight: 'normal',
     },
     {
-      src: '/fonts/Amiri-Bold.ttf', 
+      src: '/fonts/Amiri-Bold.ttf',
       fontWeight: 'bold',
     },
   ],
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
     padding: 20,
-    fontFamily: 'Amiri', 
+    fontFamily: 'Amiri',
   },
   header: {
     fontSize: 20,
@@ -61,7 +61,7 @@ type columnType = {
   format?: (value: string) => void;
 };
 const PdfComp = ({ data, columns, title }: any) => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <Document>
       <Page size="A4" style={styles.page} orientation="landscape">

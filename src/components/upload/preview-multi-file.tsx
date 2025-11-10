@@ -1,11 +1,10 @@
-import { m, AnimatePresence } from 'framer-motion';
-
+import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import { alpha } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
-import ListItemText from '@mui/material/ListItemText';
-
 import { fData } from 'src/utils/format-number';
+import IconButton from '@mui/material/IconButton';
+import { m, AnimatePresence } from 'framer-motion';
+import { alpha, Theme } from '@mui/material/styles';
+import ListItemText from '@mui/material/ListItemText';
 
 import Iconify from '../iconify';
 import { varFade } from '../animate';
@@ -23,13 +22,11 @@ export default function MultiFilePreview({
   setIsLogoIndex,
 }: UploadProps) {
   const urls: string[] = [];
+
   if (Array.isArray(files)) {
     files.forEach((file) => {
       if (typeof file === 'object' && file && 'url' in file && typeof file.url === 'string') {
         urls.push(file.url);
-      }
-      if (typeof file === 'object' && file && 'image' in file && typeof file.image === 'string') {
-        urls.push(file.image);
       }
     });
   }
@@ -39,14 +36,14 @@ export default function MultiFilePreview({
         const { key, name = '', size = 0 } = fileData(file);
         const isNotFormatFile = typeof file === 'string';
         if (thumbnail) {
+          const fadeInUp = varFade().inUp;
           return (
-            <Stack
+            <Box
               key={key}
-              component={m.div}
-              {...varFade().inUp}
-              alignItems="center"
-              display="inline-flex"
-              justifyContent="center"
+              component={m.div as any}
+              initial={fadeInUp.initial}
+              animate={fadeInUp.animate}
+              exit={fadeInUp.exit}
               sx={{
                 m: 0.5,
                 width: 80,
@@ -55,7 +52,10 @@ export default function MultiFilePreview({
                 overflow: 'hidden',
                 position: 'relative',
                 cursor: 'pointer',
-                border: (theme) =>
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: (theme: Theme) =>
                   !(isLogoIndex === index)
                     ? `solid 1px ${alpha(theme.palette.grey[500], 0.16)}`
                     : `solid 2px ${alpha(theme.palette.success.main, 0.5)}`,
@@ -78,7 +78,7 @@ export default function MultiFilePreview({
               {onRemove && (
                 <IconButton
                   size="small"
-                  onClick={(event) => {
+                  onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                     event.preventDefault();
                     event.stopPropagation();
                     onRemove(file);
@@ -89,34 +89,38 @@ export default function MultiFilePreview({
                     right: 4,
                     position: 'absolute',
                     color: 'common.white',
-                    bgcolor: (theme) => alpha(theme.palette.grey[900], 0.48),
+                    bgcolor: (theme: Theme) => alpha(theme.palette.grey[900], 0.48),
                     '&:hover': {
-                      bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
+                      bgcolor: (theme: Theme) => alpha(theme.palette.grey[900], 0.72),
                     },
                   }}
                 >
                   <Iconify icon="mingcute:close-line" width={14} />
                 </IconButton>
               )}
-            </Stack>
+            </Box>
           );
         }
 
+        const fadeInUp = varFade().inUp;
         return (
-          <Stack
+          <Box
             key={key}
-            component={m.div}
-            {...varFade().inUp}
-            spacing={2}
-            direction="column"
-            alignItems="center"
+            component={m.div as any}
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            exit={fadeInUp.exit}
             sx={{
               my: 1,
               py: 1,
               px: 1.5,
               borderRadius: 1,
               cursor: 'pointer',
-              border: (theme) =>
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 2,
+              border: (theme: Theme) =>
                 !(isLogoIndex === index)
                   ? `solid 1px ${alpha(theme.palette.grey[500], 0.16)}`
                   : `solid 2px ${alpha(theme.palette.success.main, 0.5)}`,
@@ -144,7 +148,7 @@ export default function MultiFilePreview({
                 <Iconify icon="mingcute:close-line" width={16} />
               </IconButton>
             )}
-          </Stack>
+          </Box>
         );
       })}
     </AnimatePresence>

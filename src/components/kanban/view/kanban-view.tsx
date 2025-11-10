@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 
 import { paths } from 'src/routes/paths';
 
-import { useTranslate } from 'src/locales';
+import { useTranslations } from 'next-intl';
 
 import Scrollbar from 'src/components/scrollbar';
 import EmptyContent from 'src/components/empty-content';
@@ -24,7 +24,7 @@ interface IProps {
 }
 
 export default function KanbanView({ title, board, boardEmpty }: IProps) {
-  const { t } = useTranslate();
+  const t = useTranslations();
   return (
     <Container
       maxWidth={false}
@@ -71,12 +71,7 @@ export default function KanbanView({ title, board, boardEmpty }: IProps) {
               }}
             >
               {board?.columns.map((column, index) => (
-                <KanbanColumn
-                  index={index}
-                  key={column?.id}
-                  column={column}
-                  tasks={board?.tasks}
-                />
+                <KanbanColumn index={index} key={column?.id} column={column} tasks={board?.tasks} />
               ))}
             </Stack>
           </Scrollbar>

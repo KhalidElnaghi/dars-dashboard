@@ -1,11 +1,9 @@
-import { useDropzone } from 'react-dropzone';
-
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import { alpha } from '@mui/material/styles';
+import { useTranslations } from 'next-intl';
+import { useDropzone } from 'react-dropzone';
 import Typography from '@mui/material/Typography';
-
-import { useTranslate } from 'src/locales';
+import { alpha, Theme } from '@mui/material/styles';
 
 import Image from '../image';
 import Iconify from '../iconify';
@@ -30,7 +28,7 @@ export default function UploadAvatar({
     },
     ...other,
   });
-  const { t } = useTranslate();
+  const t = useTranslations('Global.Label');
   const hasFile = !!file;
 
   const hasError = isDragReject || !!error;
@@ -44,7 +42,6 @@ export default function UploadAvatar({
       sx={{
         width: 1,
         height: 1,
-        borderRadius: '50%',
       }}
     />
   );
@@ -61,11 +58,11 @@ export default function UploadAvatar({
         width: 1,
         height: 1,
         zIndex: 9,
-        borderRadius: '50%',
+        borderRadius: 1,
         position: 'absolute',
         color: 'text.disabled',
-        bgcolor: (theme) => alpha(theme.palette.grey[500], 0.08),
-        transition: (theme) =>
+        bgcolor: (theme: Theme) => alpha(theme.palette.grey[500], 0.08),
+        transition: (theme: Theme) =>
           theme.transitions.create(['opacity'], {
             duration: theme.transitions.duration.shorter,
           }),
@@ -74,19 +71,19 @@ export default function UploadAvatar({
         },
         ...(hasError && {
           color: 'error.main',
-          bgcolor: (theme) => alpha(theme.palette.error.main, 0.08),
+          bgcolor: (theme: Theme) => alpha(theme.palette.error.main, 0.08),
         }),
         ...(hasFile && {
           zIndex: 9,
           opacity: 0,
           color: 'common.white',
-          bgcolor: (theme) => alpha(theme.palette.grey[900], 0.64),
+          bgcolor: (theme: Theme) => alpha(theme.palette.grey[900], 0.64),
         }),
       }}
     >
       <Iconify icon="solar:camera-add-bold" width={32} />
 
-      <Typography variant="caption">{t(file ? 'Update photo' : 'Upload photo')}</Typography>
+      <Typography variant="caption">{t(file ? 'update_photo' : 'upload_photo')}</Typography>
     </Stack>
   );
 
@@ -96,7 +93,7 @@ export default function UploadAvatar({
         width: 1,
         height: 1,
         overflow: 'hidden',
-        borderRadius: '50%',
+        borderRadius: 1,
         position: 'relative',
       }}
     >
@@ -116,8 +113,8 @@ export default function UploadAvatar({
           height: 144,
           cursor: 'pointer',
           overflow: 'hidden',
-          borderRadius: '50%',
-          border: (theme) => `1px dashed ${alpha(theme.palette.grey[500], 0.2)}`,
+          borderRadius: 1,
+          border: (theme: Theme) => `1px dashed ${alpha(theme.palette.grey[500], 0.2)}`,
           ...(isDragActive && {
             opacity: 0.72,
           }),
@@ -130,7 +127,7 @@ export default function UploadAvatar({
           }),
           ...(hasFile && {
             ...(hasError && {
-              bgcolor: (theme) => alpha(theme.palette.error.main, 0.08),
+              bgcolor: (theme: Theme) => alpha(theme.palette.error.main, 0.08),
             }),
             '&:hover .upload-placeholder': {
               opacity: 1,
@@ -146,7 +143,7 @@ export default function UploadAvatar({
 
       {helperText && helperText}
 
-      <RejectionFiles fileRejections={[...fileRejections]} />
+      <RejectionFiles fileRejections={fileRejections} />
     </>
   );
 }

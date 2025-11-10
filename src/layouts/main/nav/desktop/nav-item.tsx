@@ -9,7 +9,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 
 import { RouterLink } from 'src/routes/components';
 
-import { useTranslate } from 'src/locales';
+import { useTranslations } from 'next-intl';
 
 import Iconify from 'src/components/iconify';
 
@@ -19,7 +19,7 @@ import { NavItemProps, NavItemStateProps } from '../types';
 
 export const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
   ({ title, path, open, active, hasChild, externalLink, subItem, ...other }, ref) => {
-    const {t} = useTranslate();
+    const t = useTranslations();
     const renderContent = (
       <StyledNavItem
         disableRipple
@@ -167,8 +167,10 @@ export function NavItemDashboard({ path, sx, ...other }: NavItemDashboardProps) 
         >
           <Box
             component="img"
-            alt="illustration_dashboard"
-            src="/assets/illustrations/illustration_dashboard.png"
+            {...({
+              alt: 'illustration_dashboard',
+              src: '/assets/illustrations/illustration_dashboard.png',
+            } as any)}
           />
         </m.div>
       </CardActionArea>

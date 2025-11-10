@@ -1,16 +1,17 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import { Theme } from '@mui/material/styles';
 
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 
 import { hideScroll } from 'src/theme/css';
 
-import Logo from 'src/components/logo';
 import { NavSectionMini } from 'src/components/nav-section';
 
 import { NAV } from '../config-layout';
 import { useNavData } from './config-navigation';
 import NavToggleButton from '../common/nav-toggle-button';
+import Image from 'next/image';
 
 // ----------------------------------------------------------------------
 
@@ -39,11 +40,21 @@ export default function NavMini() {
           height: 1,
           position: 'fixed',
           width: NAV.W_MINI,
-          borderRight: (theme) => `dashed 1px ${theme.palette.divider}`,
+          bgcolor: 'primary.main',
+          borderRight: (theme: Theme) => `dashed 1px ${theme.palette.divider}`,
           ...hideScroll.x,
         }}
       >
-        <Logo sx={{ mx: 'auto', my: 1 }} />
+        <Box
+          sx={{
+            my: 2,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Image width={50} height={50} src="/logo/OBJECT-WHITE.png" alt="Dars Logo" />
+        </Box>
 
         <NavSectionMini
           data={navData as any}

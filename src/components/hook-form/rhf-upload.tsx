@@ -3,7 +3,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import FormHelperText from '@mui/material/FormHelperText';
 
-import { Upload, UploadBox, UploadProps, UploadAvatar, UploadProduct } from '../upload';
+import { Upload, UploadBox, UploadProps, UploadAvatar } from '../upload';
 
 // ----------------------------------------------------------------------
 
@@ -49,7 +49,7 @@ export function RHFUploadProduct({ name, rules, ...other }: Props) {
       control={control}
       render={({ field, fieldState: { error } }) => (
         <div>
-          <UploadProduct error={!!error} file={field.value} {...other} />
+          <Upload error={!!error} file={field.value} {...other} />
 
           {!!error && (
             <FormHelperText error sx={{ px: 2, textAlign: 'center' }}>
@@ -94,44 +94,40 @@ export function RHFUpload({
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState: { error } }) =>{
-        return (
-          multiple ? (
-            <Upload
-
-              multiple
-              accept={{ 'image/*': [] }}
-              files={field.value?.url ? field.value?.url : field.value}
-              error={!!error}
-              isLogoIndex={isLogoIndex}
-              setIsLogoIndex={setIsLogoIndex}
-              helperText={
-                (!!error || helperText) && (
-                  <FormHelperText error={!!error} sx={{ px: 2 }}>
-                    {error ? error?.message : helperText}
-                  </FormHelperText>
-                )
-              }
-              {...other}
-            />
-          ) : (
-            <Upload
-              accept={{ 'image/*': [] }}
-              file={field.value}
-              error={!!error}
-              helperText={
-                (!!error || helperText) && (
-                  <FormHelperText error={!!error} sx={{ px: 2 }}>
-                    {error ? error?.message : helperText}
-                  </FormHelperText>
-                )
-              }
-              {...other}
-            />
-          )
-        )
-      }
-      }
+      render={({ field, fieldState: { error } }) => {
+        return multiple ? (
+          <Upload
+            multiple
+            accept={{ 'image/*': [] }}
+            files={field.value?.url ? field.value?.url : field.value}
+            error={!!error}
+            isLogoIndex={isLogoIndex}
+            setIsLogoIndex={setIsLogoIndex}
+            helperText={
+              (!!error || helperText) && (
+                <FormHelperText error={!!error} sx={{ px: 2 }}>
+                  {error ? error?.message : helperText}
+                </FormHelperText>
+              )
+            }
+            {...other}
+          />
+        ) : (
+          <Upload
+            accept={{ 'image/*': [] }}
+            file={field.value}
+            error={!!error}
+            helperText={
+              (!!error || helperText) && (
+                <FormHelperText error={!!error} sx={{ px: 2 }}>
+                  {error ? error?.message : helperText}
+                </FormHelperText>
+              )
+            }
+            {...other}
+          />
+        );
+      }}
     />
   );
 }

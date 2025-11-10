@@ -6,7 +6,8 @@ import Box, { BoxProps } from '@mui/material/Box';
 
 import { RouterLink } from 'src/routes/components';
 
-import { useTranslate } from 'src/locales';
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 // ----------------------------------------------------------------------
 
 export interface LogoProps extends BoxProps {
@@ -18,20 +19,22 @@ export interface LogoProps extends BoxProps {
 }
 
 const Logo = forwardRef<HTMLDivElement, LogoProps>(
-  ({ width = 27, height = 35, fullLogo, enableText, disabledLink = false, sx, ...other }, ref) => {
-    const { t } = useTranslate();
+  ({ width = 15, height = 30, fullLogo, enableText, disabledLink = false, sx, ...other }, ref) => {
+    const t = useTranslations();
 
     // OR using local (public folder)
     // -------------------------------------------------------
     const logo = (
       <Box
         component="div"
-        sx={{ display: 'flex', gap: 1, width: 'auto', height: 'auto', cursor: 'pointer', ...sx }}
+        sx={{ display: 'flex', gap: 1, width: '15px', height: '30px', cursor: 'pointer', ...sx }}
       >
-        <Box
-          component="img"
+        <Image
           src={`/logo/${fullLogo ? 'SLogo' : 'SOBJECT'}.png`}
-          sx={{ width, height, cursor: 'pointer', ...sx }}
+          width={30}
+          height={55}
+          alt="logo"
+          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
         />
         {enableText && (
           <Typography
@@ -40,10 +43,10 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
             textTransform="capitalize"
             alignSelf="center"
             pt={1}
-            sx={{ 
+            sx={{
               color: '#FFFFFF',
               fontWeight: 700,
-              fontSize: { xs: '1.5rem', sm: '2rem' }
+              fontSize: { xs: '1.5rem', sm: '2rem' },
             }}
           >
             Dars

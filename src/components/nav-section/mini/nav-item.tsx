@@ -47,13 +47,13 @@ const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
         {...other}
       >
         {icon && (
-          <Box component="span" className="icon">
+          <Box className="icon" sx={{ display: 'inline-flex' }}>
             {icon}
           </Box>
         )}
 
         {title && (
-          <Box component="span" className="label">
+          <Box className="label" sx={{ display: 'inline-block' }}>
             {title}
           </Box>
         )}
@@ -65,7 +65,7 @@ const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
         )}
 
         {info && subItem && (
-          <Box component="span" className="info">
+          <Box className="info" sx={{ display: 'inline-flex' }}>
             {info}
           </Box>
         )}
@@ -142,7 +142,7 @@ const StyledNavItem = styled(ListItemButton, {
   const baseStyles = {
     item: {
       borderRadius: 6,
-      color: theme.palette.text.secondary,
+      color: '#FFFFFF',
     },
     icon: {
       width: 22,
@@ -153,7 +153,7 @@ const StyledNavItem = styled(ListItemButton, {
       textTransform: 'capitalize',
     },
     caption: {
-      color: theme.palette.text.disabled,
+      color: alpha('#FFFFFF', 0.7),
     },
   } as const;
 
@@ -191,15 +191,15 @@ const StyledNavItem = styled(ListItemButton, {
       },
       ...(active && {
         fontWeight: theme.typography.fontWeightBold,
-        backgroundColor: alpha(theme.palette.primary.main, 0.08),
-        color: lightMode ? theme.palette.primary.main : theme.palette.primary.light,
+        backgroundColor: alpha('#FFFFFF', 0.16),
+        color: '#FFFFFF',
         '&:hover': {
-          backgroundColor: alpha(theme.palette.primary.main, 0.16),
+          backgroundColor: alpha('#FFFFFF', 0.24),
         },
       }),
       ...(opened && {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.action.hover,
+        color: '#FFFFFF',
+        backgroundColor: alpha('#FFFFFF', 0.08),
       }),
     }),
 
@@ -231,13 +231,13 @@ const StyledNavItem = styled(ListItemButton, {
         marginRight: theme.spacing(-0.5),
       },
       ...(active && {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.action.selected,
+        color: '#FFFFFF',
+        backgroundColor: alpha('#FFFFFF', 0.16),
         fontWeight: theme.typography.fontWeightSemiBold,
       }),
       ...(opened && {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.action.hover,
+        color: '#FFFFFF',
+        backgroundColor: alpha('#FFFFFF', 0.08),
       }),
     }),
   };

@@ -2,12 +2,10 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname === '/') {
-    return NextResponse.redirect(new URL('/dashboard', request.url));
-  }
+  // Temporarily disabled next-intl middleware until [locale] folder structure is created
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/'],
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
 };

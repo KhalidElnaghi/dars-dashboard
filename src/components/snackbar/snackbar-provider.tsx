@@ -7,8 +7,6 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 
 // ----------------------------------------------------------------------
-import { useTranslate } from 'src/locales';
-
 import Iconify from '../iconify';
 import { useSettingsContext } from '../settings';
 import { StyledIcon, StyledNotistack } from './styles';
@@ -18,10 +16,8 @@ type Props = {
 };
 
 export default function SnackbarProvider({ children }: Props) {
-  const { i18n } = useTranslate();
-
   const settings = useSettingsContext();
-  const isRTL = i18n.language === 'ar' ? 'rtl' : 'ltr' ;
+  const isRTL = settings.themeDirection;
 
   const notistackRef = useRef<any>(null);
 
@@ -31,9 +27,9 @@ export default function SnackbarProvider({ children }: Props) {
       maxSnack={5}
       preventDuplicate
       autoHideDuration={3000}
-      TransitionComponent={isRTL ? Collapse : undefined}
+      TransitionComponent={isRTL === 'rtl' ? Collapse : undefined}
       variant="success" // Set default variant
-      anchorOrigin={{ vertical: 'top', horizontal: isRTL === 'rtl' ? 'left' : 'right'}}
+      anchorOrigin={{ vertical: 'top', horizontal: isRTL === 'rtl' ? 'left' : 'right' }}
       iconVariant={{
         info: (
           <StyledIcon color="info">

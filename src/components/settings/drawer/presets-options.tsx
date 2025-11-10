@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { alpha } from '@mui/material/styles';
+import { alpha, Theme } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
 
 import { presetOptions } from 'src/theme/options/presets';
@@ -24,7 +24,7 @@ export default function PresetsOptions({ value, onChange }: PresetsOptionsProps)
             sx={{
               height: 56,
               borderRadius: 1,
-              border: (theme) => `solid 1px ${alpha(theme.palette.grey[500], 0.08)}`,
+              border: (theme: Theme) => `solid 1px ${alpha(theme.palette.grey[500], 0.08)}`,
               ...(selected && {
                 borderColor: 'transparent',
                 bgcolor: alpha(option.value, 0.08),
@@ -37,7 +37,7 @@ export default function PresetsOptions({ value, onChange }: PresetsOptionsProps)
                 height: 12,
                 borderRadius: '50%',
                 bgcolor: option.value,
-                transition: (theme) =>
+                transition: (theme: Theme) =>
                   theme.transitions.create(['transform'], {
                     duration: theme.transitions.duration.shorter,
                   }),

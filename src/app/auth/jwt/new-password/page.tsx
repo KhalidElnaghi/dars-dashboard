@@ -1,11 +1,12 @@
-import ModernNewPasswordView from "src/sections/auth/jwt/modern-new-password-view";
+import ModernNewPasswordView from 'src/sections/auth/jwt/modern-new-password-view';
 
 export const metadata = {
   title: 'Auth Modern: New Password',
 };
-interface IProps{
-  searchParams:{email:string}
+interface IProps {
+  searchParams: Promise<{ email: string }>;
 }
-export default function ModernNewPasswordPage({searchParams}:IProps) {
-  return <ModernNewPasswordView email={searchParams?.email} />;
+export default async function ModernNewPasswordPage({ searchParams }: IProps) {
+  const params = await searchParams;
+  return <ModernNewPasswordView email={params?.email} />;
 }

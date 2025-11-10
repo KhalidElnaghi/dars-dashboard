@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from 'next-intl';
 
 import { getNameKeyLang } from 'src/utils/helperfunction';
 
@@ -33,7 +33,7 @@ function CutomAutocompleteView({
   searchQuery,
   defaultValue,
 }: IProps) {
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <RHFAutocomplete
       onCustomChange={onCustomChange}
@@ -48,7 +48,7 @@ function CutomAutocompleteView({
       getOptionLabel={(option) =>
         (option as ITems)[getNameKeyLang()]
           ? (option as ITems)[getNameKeyLang()]
-          : (option as ITems).name ?? ''
+          : ((option as ITems).name ?? '')
       }
       isOptionEqualToValue={(option, value) =>
         option.id ? option.id === value.id : option.product_id === value.product_id

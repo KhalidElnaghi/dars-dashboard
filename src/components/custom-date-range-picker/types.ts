@@ -1,10 +1,12 @@
+import { Dayjs } from 'dayjs';
+
 // ----------------------------------------------------------------------
 
 export type DateRangePickerProps = {
-  startDate: Date | null;
-  endDate: Date | null;
-  onChangeStartDate: (newValue: Date | null) => void;
-  onChangeEndDate: (newValue: Date | null) => void;
+  startDate: Dayjs | null;
+  endDate: Dayjs | null;
+  onChangeStartDate: (newValue: Dayjs | null) => void;
+  onChangeEndDate: (newValue: Dayjs | null) => void;
   //
   open: boolean;
   onOpen?: VoidFunction;
@@ -20,6 +22,6 @@ export type DateRangePickerProps = {
   title?: string;
   variant?: 'calendar' | 'input';
   //
-  setStartDate?: React.Dispatch<React.SetStateAction<Date | null>>;
-  setEndDate?: React.Dispatch<React.SetStateAction<Date | null>>;
+  setStartDate?: React.Dispatch<React.SetStateAction<Dayjs | null>>;
+  setEndDate?: React.Dispatch<React.SetStateAction<Dayjs | null>>;
 };

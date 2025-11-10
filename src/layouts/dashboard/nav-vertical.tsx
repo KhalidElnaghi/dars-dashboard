@@ -16,6 +16,7 @@ import { NavSectionVertical } from 'src/components/nav-section';
 import { NAV } from '../config-layout';
 import { useNavData } from './config-navigation';
 import NavToggleButton from '../common/nav-toggle-button';
+import Image from 'next/image';
 
 // ----------------------------------------------------------------------
 

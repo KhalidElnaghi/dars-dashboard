@@ -48,10 +48,13 @@ export default function LanguagePopover() {
 
   const { allLangs, currentLang } = useLocales();
 
-  const handleChangeLang = useCallback((newLang: string) => {
-    onChangeLang(newLang);
-    popover.onClose();
-  }, [onChangeLang,popover]);
+  const handleChangeLang = useCallback(
+    (newLang: string) => {
+      onChangeLang(newLang);
+      popover.onClose();
+    },
+    [onChangeLang, popover]
+  );
 
   return (
     <>

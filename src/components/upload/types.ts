@@ -1,5 +1,4 @@
 import { DropzoneOptions } from 'react-dropzone';
-
 import { Theme, SxProps } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
@@ -20,13 +19,13 @@ export interface UploadProps extends DropzoneOptions {
   disableMultiple?: boolean;
   rules?: any;
   //
-  file?: CustomFile | string | null ;
+  file?: CustomFile | string | null;
   onDelete?: VoidFunction;
   //
-  files?: (File | string )[];
+  files?: (File | string)[];
   onUpload?: VoidFunction;
   onRemove?: (file: CustomFile | string) => void;
   onRemoveAll?: VoidFunction;
-  isLogoIndex?:number;
-  setIsLogoIndex?:(index: number) => void;
+  isLogoIndex?: number;
+  setIsLogoIndex?: (index: number) => void;
 }

@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { alpha } from '@mui/material/styles';
+import { alpha, Theme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Stack, { StackProps } from '@mui/material/Stack';
 
@@ -32,8 +32,8 @@ export default function EmptyContent({
         height: 1,
         ...(filled && {
           borderRadius: 2,
-          bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
-          border: (theme) => `dashed 1px ${alpha(theme.palette.grey[500], 0.08)}`,
+          bgcolor: (theme: Theme) => alpha(theme.palette.grey[500], 0.04),
+          border: (theme: Theme) => `dashed 1px ${alpha(theme.palette.grey[500], 0.08)}`,
         }),
         ...sx,
       }}
@@ -41,9 +41,11 @@ export default function EmptyContent({
     >
       <Box
         component="img"
-        alt="empty content"
-        src={imgUrl || '/assets/icons/empty/ic_content.svg'}
         sx={{ width: 1, maxWidth: 160 }}
+        {...({
+          alt: 'empty content',
+          src: imgUrl || '/assets/icons/empty/ic_content.svg',
+        } as any)}
       />
 
       {title && (

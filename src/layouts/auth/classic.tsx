@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { useTheme } from '@mui/material/styles';
 
-import { useTranslate } from 'src/locales';
+import { useTranslations } from 'next-intl';
 
 import Image from 'next/image';
 // ----------------------------------------------------------------------
@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default function AuthClassicLayout({ children, image, title }: Props) {
-  const { t } = useTranslate();
+  const t = useTranslations();
   const theme = useTheme();
 
   const renderContent = (

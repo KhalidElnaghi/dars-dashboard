@@ -7,7 +7,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 
 import { RouterLink } from 'src/routes/components';
 
-import { useTranslate } from 'src/locales';
+import { useTranslations } from 'next-intl';
 
 import Iconify from 'src/components/iconify';
 
@@ -17,7 +17,7 @@ import { NavItemProps, NavItemStateProps } from '../types';
 
 export const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
   ({ title, path, icon, open, active, hasChild, externalLink, ...other }, ref) => {
-    const {t} = useTranslate();
+    const t = useTranslations();
     const renderContent = (
       <StyledNavItem ref={ref} open={open} active={active} {...other}>
         <Box component="span" sx={{ mr: 2, display: 'inline-flex' }}>
@@ -25,7 +25,7 @@ export const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
         </Box>
 
         <Box component="span" sx={{ flexGrow: 1 }}>
-        {t(title)}
+          {t(title)}
         </Box>
 
         {hasChild && (

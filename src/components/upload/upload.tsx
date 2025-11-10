@@ -1,13 +1,11 @@
-import { useDropzone } from 'react-dropzone';
-
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { alpha } from '@mui/material/styles';
+import { useTranslations } from 'next-intl';
+import { useDropzone } from 'react-dropzone';
+import Box, { BoxProps } from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-
-import { useTranslate } from 'src/locales';
+import { alpha, Theme } from '@mui/material/styles';
 import { UploadIllustration } from 'src/assets/illustrations';
 
 import Iconify from '../iconify';
@@ -42,7 +40,7 @@ export default function Upload({
     disabled,
     ...other,
   });
-  const {t} = useTranslate();
+  const t = useTranslations('Global');
 
   const hasFile = !!file && !multiple;
 
@@ -52,22 +50,25 @@ export default function Upload({
 
   const renderPlaceholder = (
     <Stack spacing={3} alignItems="center" justifyContent="center" flexWrap="wrap">
-      <UploadIllustration sx={{ width: 1, maxWidth: 200 }} />
+      <UploadIllustration sx={{ width: 1, maxWidth: 100 }} />
       <Stack spacing={1} sx={{ textAlign: 'center' }}>
-        <Typography variant="h6">{t(`Drop or Select file`)}</Typography>
+        {/* <Typography variant="h6">{t('Label.drop_or_select')}</Typography> */}
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {t(`Drop files here or click`)}
-          <Box
-            component="span"
-            sx={{
-              mx: 0.5,
-              color: 'primary.main',
-              textDecoration: 'underline',
-            }}
-          >
-            {t(`browse`)}
-          </Box>
-          {t(`thorough your machine`)}
+          {t.rich('Helper.drop_or_select', {
+            browse: (chunks) => (
+              <Box
+                {...({
+                  component: 'span',
+                  sx: {
+                    mx: 0.5,
+                    color: 'primary.main',
+                    textDecoration: 'underline',
+                  },
+                  children: chunks,
+                } as BoxProps<'span'>)}
+              />
+            ),
+          })}
         </Typography>
       </Stack>
     </Stack>
@@ -86,10 +87,10 @@ export default function Upload({
         right: 16,
         zIndex: 9,
         position: 'absolute',
-        color: (theme) => alpha(theme.palette.common.white, 0.8),
-        bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
+        color: (theme: Theme) => alpha(theme.palette.common.white, 0.8),
+        bgcolor: (theme: Theme) => alpha(theme.palette.grey[900], 0.72),
         '&:hover': {
-          bgcolor: (theme) => alpha(theme.palette.grey[900], 0.48),
+          bgcolor: (theme: Theme) => alpha(theme.palette.grey[900], 0.48),
         },
       }}
     >
@@ -111,7 +112,7 @@ export default function Upload({
       <Stack direction="row" justifyContent="flex-end" spacing={1.5}>
         {onRemoveAll && (
           <Button color="inherit" variant="outlined" size="small" onClick={onRemoveAll}>
-            Remove All
+            {t('Action.remove_all')}
           </Button>
         )}
 
@@ -122,7 +123,7 @@ export default function Upload({
             onClick={onUpload}
             startIcon={<Iconify icon="eva:cloud-upload-fill" />}
           >
-            Upload
+            {t('Action.upload')}
           </Button>
         )}
       </Stack>
@@ -140,9 +141,9 @@ export default function Upload({
           cursor: 'pointer',
           overflow: 'hidden',
           position: 'relative',
-          bgcolor: (theme) => alpha(theme.palette.grey[500], 0.08),
-          border: (theme) => `1px dashed ${alpha(theme.palette.grey[500], 0.2)}`,
-          transition: (theme) => theme.transitions.create(['opacity', 'padding']),
+          bgcolor: (theme: Theme) => alpha(theme.palette.grey[500], 0.08),
+          border: (theme: Theme) => `1px dashed ${alpha(theme.palette.grey[500], 0.2)}`,
+          transition: (theme: Theme) => theme.transitions.create(['opacity', 'padding']),
           '&:hover': {
             opacity: 0.72,
           },
@@ -156,7 +157,7 @@ export default function Upload({
           ...(hasError && {
             color: 'error.main',
             borderColor: 'error.main',
-            bgcolor: (theme) => alpha(theme.palette.error.main, 0.08),
+            bgcolor: (theme: Theme) => alpha(theme.palette.error.main, 0.08),
           }),
           ...(hasFile && {
             padding: '24% 0',
@@ -172,7 +173,7 @@ export default function Upload({
 
       {helperText && helperText}
 
-      <RejectionFiles fileRejections={[...fileRejections]} />
+      <RejectionFiles fileRejections={fileRejections} />
 
       {renderMultiPreview}
     </Box>

@@ -1,14 +1,25 @@
-module.exports = {
+const createNextIntlPlugin = require('next-intl/plugin');
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+
+module.exports = withNextIntl({
   env: {
     NEXT_PUBLIC_HOST_API: process.env.HOST_API,
   },
   images: {
-    domains: [`${process.env.IMAGE_DOMAIN}`],
     remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: `${process.env.IMAGE_DOMAIN}`,
-      },
+      ...(process.env.IMAGE_DOMAIN
+        ? [
+            {
+              protocol: 'https',
+              hostname: process.env.IMAGE_DOMAIN,
+            },
+            {
+              protocol: 'http',
+              hostname: process.env.IMAGE_DOMAIN,
+            },
+          ]
+        : []),
     ],
     unoptimized: true,
   },
@@ -45,4 +56,4 @@ module.exports = {
   // Empty turbopack config to silence the warning
   // This allows webpack config to be used when --webpack flag is passed
   turbopack: {},
-};
+});

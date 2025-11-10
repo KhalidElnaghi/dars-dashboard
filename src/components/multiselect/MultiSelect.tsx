@@ -8,7 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-import { useTranslate } from 'src/locales';
+import { useTranslations } from 'next-intl';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -21,11 +21,15 @@ const MenuProps = {
   },
 };
 
-
-
-export default function MultipleSelect({names, placeholder}: {names: string[], placeholder: string}) {
+export default function MultipleSelect({
+  names,
+  placeholder,
+}: {
+  names: string[];
+  placeholder: string;
+}) {
   const [personName, setPersonName] = React.useState<string[]>([]);
-  const { t } = useTranslate();
+  const t = useTranslations();
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {
@@ -33,13 +37,13 @@ export default function MultipleSelect({names, placeholder}: {names: string[], p
     } = event;
     setPersonName(
       // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+      typeof value === 'string' ? value.split(',') : value
     );
   };
 
   return (
     <div>
-      <FormControl sx={{  width: "100%" }}>
+      <FormControl sx={{ width: '100%' }}>
         <InputLabel id="demo-multiple-checkbox-label">{t(`${placeholder}`)}</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"

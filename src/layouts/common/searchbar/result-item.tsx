@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { alpha } from '@mui/material/styles';
+import { alpha, Theme } from '@mui/material/styles';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 
@@ -28,11 +28,11 @@ export default function ResultItem({ title, path, groupLabel, onClickItem }: Pro
         borderWidth: 1,
         borderStyle: 'dashed',
         borderColor: 'transparent',
-        borderBottomColor: (theme) => theme.palette.divider,
+        borderBottomColor: (theme: Theme) => theme.palette.divider,
         '&:hover': {
           borderRadius: 1,
-          borderColor: (theme) => theme.palette.primary.main,
-          backgroundColor: (theme) =>
+          borderColor: (theme: Theme) => theme.palette.primary.main,
+          backgroundColor: (theme: Theme) =>
             alpha(theme.palette.primary.main, theme.palette.action.hoverOpacity),
         },
       }}

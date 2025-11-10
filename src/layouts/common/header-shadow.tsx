@@ -1,4 +1,5 @@
 import Box, { BoxProps } from '@mui/material/Box';
+import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
@@ -16,7 +17,7 @@ export default function HeaderShadow({ sx, ...other }: BoxProps) {
         borderRadius: '50%',
         position: 'absolute',
         width: `calc(100% - 48px)`,
-        boxShadow: (theme) => theme.customShadows.z8,
+        boxShadow: (theme: Theme) => theme.customShadows.z8,
         ...sx,
       }}
       {...other}

@@ -1,10 +1,10 @@
 import Button from '@mui/material/Button';
 import { Theme, SxProps } from '@mui/material/styles';
+import { useTranslations } from 'next-intl';
 
 import { RouterLink } from 'src/routes/components';
 
-import { useTranslate } from 'src/locales';
-import { PATH_AFTER_LOGIN } from 'src/config-global';
+import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -13,9 +13,14 @@ type Props = {
 };
 
 export default function LoginButton({ sx }: Props) {
-  const {t} = useTranslate();
+  const t = useTranslations();
   return (
-    <Button component={RouterLink} href={PATH_AFTER_LOGIN} variant="outlined" sx={{ mr: 1, ...sx }}>
+    <Button
+      component={RouterLink}
+      href={paths.auth.jwt.login}
+      variant="outlined"
+      sx={{ mr: 1, ...sx }}
+    >
       {t('Login')}
     </Button>
   );

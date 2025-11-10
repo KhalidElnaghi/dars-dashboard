@@ -1,6 +1,7 @@
 import { m, useSpring, MotionValue } from 'framer-motion';
 
 import Box, { BoxProps } from '@mui/material/Box';
+import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
@@ -36,7 +37,7 @@ export default function ScrollProgress({
         transformOrigin: '0%',
         bgcolor: 'text.primary',
         ...(color !== 'inherit' && {
-          background: (theme) =>
+          background: (theme: Theme) =>
             `linear-gradient(135deg, ${theme.palette[color].light} 0%, ${theme.palette[color].main} 100%)`,
         }),
         ...sx,

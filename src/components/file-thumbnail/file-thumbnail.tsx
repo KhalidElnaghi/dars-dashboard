@@ -33,7 +33,6 @@ export default function FileThumbnail({
     format === 'image' && imageView ? (
       <Box
         component="img"
-        src={preview}
         sx={{
           width: 1,
           height: 1,
@@ -41,17 +40,18 @@ export default function FileThumbnail({
           objectFit: 'cover',
           ...imgSx,
         }}
+        {...({ src: preview } as any)}
       />
     ) : (
       <Box
         component="img"
-        src={fileThumb(format)}
         sx={{
           width: 32,
           height: 32,
           flexShrink: 0,
           ...sx,
         }}
+        {...({ src: fileThumb(format) } as any)}
       />
     );
 

@@ -1,9 +1,10 @@
 import { Toaster } from 'sonner';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, getLocale } from 'next-intl/server';
 
 /* eslint-disable perfectionist/sort-imports */
 import 'src/global.css';
-// i18n
-import 'src/locales/i18n';
+
 // ----------------------------------------------------------------------
 
 import ThemeProvider from 'src/theme';
@@ -15,7 +16,7 @@ import { SettingsDrawer, SettingsProvider } from 'src/components/settings';
 import SnackbarProvider from 'src/components/snackbar/snackbar-provider';
 
 import { AuthProvider } from 'src/auth/context/jwt';
-import { LocalizationProvider } from 'src/locales';
+import LocalizationProvider from 'src/components/localization-provider';
 import ReactQueryProvider from 'src/actions/react-query-provider';
 // ----------------------------------------------------------------------
 
@@ -27,9 +28,9 @@ export const viewport = {
 };
 
 export const metadata = {
-  title: 'Talby',
-  description: 'An application for delivering orders and charging in the Kingdom of Saudi Arabia',
-  keywords: 'mart,order,charge,delivery,shop,food,market',
+  title: 'Dars',
+  description: 'An application for delivering classes and lessons',
+  keywords: 'dars,class,lesson,learning,student,teacher,education,school',
   manifest: '/manifest.json',
   icons: [
     { rel: 'icon', url: '/favicon/favicon.ico' },
@@ -43,37 +44,42 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function RootLayout({ children }: Props) {
+export default async function RootLayout({ children }: Props) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en" className={primaryFont.className}>
+    <html lang={locale} className={primaryFont.className}>
       <body>
-        <ReactQueryProvider>
-          <AuthProvider>
-            <LocalizationProvider>
-              <SettingsProvider
-                defaultSettings={{
-                  themeMode: 'light', // 'light' | 'dark'
-                  themeDirection: 'ltr', //  'rtl' | 'ltr'
-                  themeContrast: 'default', // 'default' | 'bold'
-                  themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
-                  themeColorPresets: 'default', // 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red'
-                  themeStretch: false,
-                }}
-              >
-                <ThemeProvider>
-                  <MotionLazy>
-                    <SnackbarProvider>
-                      <SettingsDrawer />
-                      <ProgressBar />
-                      {children}
-                    </SnackbarProvider>
-                  </MotionLazy>
-                </ThemeProvider>
-              </SettingsProvider>
-            </LocalizationProvider>
-          </AuthProvider>
-          <Toaster />
-        </ReactQueryProvider>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <ReactQueryProvider>
+            <AuthProvider>
+              <LocalizationProvider>
+                <SettingsProvider
+                  defaultSettings={{
+                    themeMode: 'light', // 'light' | 'dark'
+                    themeDirection: 'ltr', //  'rtl' | 'ltr'
+                    themeContrast: 'default', // 'default' | 'bold'
+                    themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
+                    themeColorPresets: 'default', // 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red'
+                    themeStretch: false,
+                  }}
+                >
+                  <ThemeProvider>
+                    <MotionLazy>
+                      <SnackbarProvider>
+                        <SettingsDrawer />
+                        <ProgressBar />
+                        {children}
+                      </SnackbarProvider>
+                    </MotionLazy>
+                  </ThemeProvider>
+                </SettingsProvider>
+              </LocalizationProvider>
+            </AuthProvider>
+            <Toaster />
+          </ReactQueryProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -2,7 +2,6 @@
 
 import Cookies from 'js-cookie';
 import isEqual from 'lodash/isEqual';
-import { useTranslation } from 'react-i18next';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 
 import { useLocalStorage } from 'src/hooks/use-local-storage';
@@ -23,7 +22,6 @@ type SettingsProviderProps = {
 
 export function SettingsProvider({ children, defaultSettings }: SettingsProviderProps) {
   const { state, update, reset } = useLocalStorage(STORAGE_KEY, defaultSettings);
-  const { t, i18n, ready } = useTranslation();
 
   const [openDrawer, setOpenDrawer] = useState(false);
   const onChangeDirectionByLang = useCallback(
@@ -47,9 +45,7 @@ export function SettingsProvider({ children, defaultSettings }: SettingsProvider
     onChangeDirectionByLang(finalLang);
     Cookies.set('Language', finalLang);
     Cookies.remove('browserLang');
-    i18n.changeLanguage(finalLang || '');
-  }, [i18n, onChangeDirectionByLang]);
-
+  }, [onChangeDirectionByLang]);
 
   const onToggleDrawer = useCallback(() => {
     setOpenDrawer((prev) => !prev);

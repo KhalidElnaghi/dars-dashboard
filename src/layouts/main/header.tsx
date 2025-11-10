@@ -13,12 +13,11 @@ import { useOffSetTop } from 'src/hooks/use-off-set-top';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import { bgBlur } from 'src/theme/css';
-import { useTranslate } from 'src/locales';
+import { useTranslations } from 'next-intl';
 
 import NavMobile from './nav/mobile';
 import NavDesktop from './nav/desktop';
 import { HEADER } from '../config-layout';
-import { navConfig } from './config-navigation';
 import LoginButton from '../common/login-button';
 import HeaderShadow from '../common/header-shadow';
 import SettingsButton from '../common/settings-button';
@@ -31,7 +30,7 @@ export default function Header() {
 
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
 
-  const { t } = useTranslate();
+  const t = useTranslations();
   const router = useRouter();
   return (
     <AppBar>
@@ -74,7 +73,7 @@ export default function Header() {
                 router.push('/auth/jwt/register');
               }}
             >
-              {t('Try Talby now')}
+              {t('Try Dars now')}
             </Button>
           )}
           <LanguagePopover />
@@ -82,12 +81,9 @@ export default function Header() {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {mdUp && <NavDesktop data={navConfig} />}
-
           <Stack alignItems="center" direction={{ xs: 'row', md: 'row-reverse' }} gap={2}>
             {mdUp && <LoginButton />}
 
-            {!mdUp && <NavMobile data={navConfig} />}
             <Image src="/logo/Logo.svg" alt="logo" width={87} height={37} />
           </Stack>
         </Container>

@@ -4,12 +4,10 @@ import { alpha, useTheme } from '@mui/material/styles';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { useTranslate } from 'src/locales';
+import { useTranslations } from 'next-intl';
 import { bgGradient } from 'src/theme/css';
 
 import Logo from 'src/components/logo';
-
-import Header from '../common/header-simple';
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -19,10 +17,9 @@ type Props = {
 };
 
 export default function RegisterLayout({ children, image, title }: Props) {
-  const { t } = useTranslate();
+  const t = useTranslations();
   const theme = useTheme();
   const mdUp = useResponsive('up', 'md');
-
 
   const renderContent = (
     <Stack
@@ -39,21 +36,18 @@ export default function RegisterLayout({ children, image, title }: Props) {
     </Stack>
   );
 
- 
-
   return (
     <Stack
       component="main"
       direction="row"
       sx={{
         minHeight: '100vh',
-        direction: theme.direction === "rtl" ? "rtl" : "",
-        textAlign: theme.direction === "rtl" ? "left" : "",
+        direction: theme.direction === 'rtl' ? 'rtl' : '',
+        textAlign: theme.direction === 'rtl' ? 'left' : '',
         backgroundImage:
-        'linear-gradient(to right top, #bc71e4, #f37ab9, #ff999e, #f6bca1, #ebdac1)',
+          'linear-gradient(to right top, #bc71e4, #f37ab9, #ff999e, #f6bca1, #ebdac1)',
       }}
     >
-      <Header />
       {/* {renderLogo}
 
       {mdUp && renderSection} */}

@@ -17,17 +17,16 @@ import { useRouter, useSearchParams } from 'src/routes/hooks';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import { useTranslate } from 'src/locales';
 import { useAuthContext } from 'src/auth/hooks';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
+import { useTranslations } from 'next-intl';
 // ----------------------------------------------------------------------
 
 export default function LoginBYEmailView() {
-  const { t } = useTranslate();
+  const t = useTranslations();
   const { login } = useAuthContext();
-
 
   const [errorMsg, setErrorMsg] = useState('');
   const { enqueueSnackbar } = useSnackbar();
@@ -43,12 +42,12 @@ export default function LoginBYEmailView() {
       .required('Email is required')
       .email('Email must be a valid username address'),
     password: Yup.string()
-      .required(t('Password is required'))
-      .min(8, t('Password must be at least 8 characters long'))
-      .matches(/[0-9]/, t('Password must contain at least one digit'))
-      .matches(/[a-z]/, t('Password must contain at least one lowercase letter'))
-      .matches(/[A-Z]/, t('Password must contain at least one uppercase letter'))
-      .matches(/[!@#$%^&*(),.?":{}|<>]/, t('Password must contain at least one special character')),
+      .required(t('Message.Error.password_required'))
+      .min(8, t('Message.Error.password_must_be_at_least_8_characters_long'))
+      .matches(/[0-9]/, t('Message.Error.password_must_contain_at_least_one_digit'))
+      .matches(/[a-z]/, t('Message.Error.password_must_contain_at_least_one_lowercase_letter'))
+      .matches(/[A-Z]/, t('Message.Error.password_must_contain_at_least_one_uppercase_letter'))
+      .matches(/[!@#$%^&*(),.?":{}|<>]/, t('Message.Error.password_must_contain_at_least_one_special_character')),
   });
 
   const methods = useForm({
@@ -80,11 +79,11 @@ export default function LoginBYEmailView() {
 
   const renderForm = (
     <Stack spacing={2.5} sx={{ minWidth: '100%' }}>
-      <RHFTextField name="email" label={t('email')} />
+      <RHFTextField name="email" label={t('Label.email')} />
 
       <RHFTextField
         name="password"
-        label={t('password')}
+        label={t('Label.password')}
         // @ts-ignore
         type={password.value ? 'text' : 'password'}
         InputProps={{
@@ -110,7 +109,7 @@ export default function LoginBYEmailView() {
         loading={isSubmitting}
         color="primary"
       >
-        {t('login')}
+        {t('Button.sign_in')}
       </LoadingButton>
     </Stack>
   );

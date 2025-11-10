@@ -2,12 +2,13 @@
 
 import { m } from 'framer-motion';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
 import { RouterLink } from 'src/routes/components';
 
-import CompactLayout from 'src/layouts/compact';
 import { PageNotFoundIllustration } from 'src/assets/illustrations';
 
 import { varBounce, MotionContainer } from 'src/components/animate';
@@ -16,8 +17,21 @@ import { varBounce, MotionContainer } from 'src/components/animate';
 
 export default function NotFoundView() {
   return (
-    <CompactLayout>
-      <MotionContainer>
+    <Container>
+      <Box
+        sx={{
+          py: 12,
+          maxWidth: 480,
+          mx: 'auto',
+          display: 'flex',
+          minHeight: '100vh',
+          textAlign: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
+        <MotionContainer>
         <m.div variants={varBounce().in}>
           <Typography variant="h3" sx={{ mb: 2 }}>
             Sorry, Page Not Found!
@@ -44,6 +58,7 @@ export default function NotFoundView() {
           Go to Home
         </Button>
       </MotionContainer>
-    </CompactLayout>
+      </Box>
+    </Container>
   );
 }

@@ -17,17 +17,17 @@ import Image from 'next/image';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import i18n from 'src/locales/i18n';
-import { useTranslate } from 'src/locales';
-
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import { ForgetPassword } from 'src/actions/auth';
 import { useSnackbar } from 'notistack';
+import { useLocale, useTranslations } from 'next-intl';
+
 // ----------------------------------------------------------------------
 
 export default function ModernForgotPasswordView() {
-  const { t } = useTranslate();
+  const t = useTranslations();
+  const local = useLocale();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -54,16 +54,16 @@ export default function ModernForgotPasswordView() {
       email: data.email,
     };
     // try {
-      // const res = await ForgetPassword(mail);
-      // if (res === 200) {
-        router.push(`/auth/jwt/new-password?email=${mail?.email}`);
-      // } else {
-        // enqueueSnackbar(typeof res === 'object' && 'error' in res ? res.error : 'Unknown error', {
-          // variant: 'error',
-        // });
-      // }
+    // const res = await ForgetPassword(mail);
+    // if (res === 200) {
+    router.push(`/auth/jwt/new-password?email=${mail?.email}`);
+    // } else {
+    // enqueueSnackbar(typeof res === 'object' && 'error' in res ? res.error : 'Unknown error', {
+    // variant: 'error',
+    // });
+    // }
     // } catch (erro) {
-      // enqueueSnackbar(`${erro}`, { variant: 'error' });
+    // enqueueSnackbar(`${erro}`, { variant: 'error' });
     // }
   });
 
@@ -114,7 +114,7 @@ export default function ModernForgotPasswordView() {
         sx={{
           alignItems: 'center',
           display: 'inline-flex',
-          flexDirection: i18n.language === 'ar' ? 'row-reverse' : 'row',
+          flexDirection: local === 'ar' ? 'row-reverse' : 'row',
           alignSelf: 'center',
           gap: 0.5,
         }}

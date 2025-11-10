@@ -4,7 +4,7 @@ import { paths } from 'src/routes/paths';
 
 // import { hasClientPermission } from 'src/utils/hasClientPermission';
 
-import { useTranslate } from 'src/locales';
+import { useTranslations } from 'next-intl';
 
 import SvgColor from 'src/components/svg-color';
 
@@ -46,11 +46,11 @@ const ICONS = {
 };
 
 export function useNavData() {
-  const { t } = useTranslate();
+  const t = useTranslations();
   const data = useMemo(
     () => [
       {
-        items: [{ title: t('main'), path: paths.dashboard.root, icon: ICONS.dashboard }],
+        items: [{ title: t('Nav.main'), path: paths.dashboard.root, icon: ICONS.dashboard }],
       },
     ],
     [t]

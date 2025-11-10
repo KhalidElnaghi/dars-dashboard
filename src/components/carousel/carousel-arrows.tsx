@@ -21,7 +21,7 @@ const StyledIconButton = styled(IconButton, {
     duration: theme.transitions.duration.shorter,
   }),
   ...(shape === 'rounded' && {
-    borderRadius: theme.shape.borderRadius * 1.5,
+    borderRadius: (theme.shape.borderRadius as number) * 1.5,
   }),
   ...(!filled && {
     opacity: 0.48,

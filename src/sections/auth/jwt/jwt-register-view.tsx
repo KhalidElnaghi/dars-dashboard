@@ -18,7 +18,7 @@ import { useRouter } from 'src/routes/hooks';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import { useTranslate } from 'src/locales';
+import { useTranslations } from 'next-intl';
 import { Register } from 'src/actions/auth';
 import { useAuthContext } from 'src/auth/hooks';
 
@@ -32,7 +32,7 @@ import OtpConfirmDialog from './otp-confirm-dialog';
 
 export default function JwtRegisterView() {
   const settings = useSettingsContext();
-  const { t } = useTranslate();
+  const t = useTranslations();
   const [confirm, setConfirm] = useState<null | {}>(null);
   const [phone, setPhone] = useState<string>('');
 
@@ -141,12 +141,12 @@ export default function JwtRegisterView() {
           sx={{ width: '100%' }}
           inputProps={{
             maxLength: 9,
-            inputMode: 'numeric', 
-            pattern: '[0-9]*', 
+            inputMode: 'numeric',
+            pattern: '[0-9]*',
           }}
           name="phone"
           label={t('Phone')}
-          type="text" 
+          type="text"
         />
       </Stack>
       <RHFTextField

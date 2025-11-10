@@ -78,7 +78,6 @@ export default function Main({ children, sx, ...other }: BoxProps) {
       }}
       {...other}
     >
-      <Box sx={{ pt: 5, mt: 5 }} />
       {children}
     </Box>
   );

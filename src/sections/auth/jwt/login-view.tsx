@@ -11,17 +11,15 @@ import Container from '@mui/material/Container';
 import { Box, Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-import { useTranslate } from 'src/locales';
-
 import Iconify from 'src/components/iconify';
 import { useSettingsContext } from 'src/components/settings';
 
 import LoginBYEmailView from './login-with-email';
-import LoginBYPhoneView from './login-with-phone';
+import { useTranslations } from 'next-intl';
 
 export default function LoginView() {
   const settings = useSettingsContext();
-  const { t } = useTranslate();
+  const t = useTranslations();
 
   const [currentTab, setCurrentTab] = useState('by_email');
 
@@ -29,19 +27,7 @@ export default function LoginView() {
     setCurrentTab(newValue);
   }, []);
 
-  const TABS = [
-    {
-      value: 'by_email',
-      label: t('By Email'),
-      icon: <Iconify icon="tabler:password-user" width={24} />,
-    },
-    // Phone login disabled - only email/password login is supported
-    // {
-    //   value: 'by_phone',
-    //   label: t('By Phone'),
-    //   icon: <Iconify icon="tabler:password-mobile-phone" width={24} />,
-    // },
-  ];
+
   const renderHead = (
     <Stack sx={{ mb: 2 }}>
       <Typography variant="h4" textTransform="capitalize" textAlign="center">
@@ -73,21 +59,10 @@ export default function LoginView() {
           }}
         >
           {renderHead}
-          {TABS.length > 1 && (
-            <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: { xs: 3, md: 5 } }}>
-              <Tabs value={currentTab} onChange={handleChangeTab} variant="fullWidth" centered>
-                {TABS.map((tab) => (
-                  <Tab key={tab.value} label={tab.label} icon={tab.icon} value={tab.value} />
-                ))}
-              </Tabs>
-            </Box>
-          )}
-          {currentTab === 'by_email' && <LoginBYEmailView />}
 
-          {currentTab === 'by_phone' && <LoginBYPhoneView />}
+          <LoginBYEmailView />
         </Box>
       </Container>
-
     </Box>
   );
 }

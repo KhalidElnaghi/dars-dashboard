@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
+import { Theme } from '@mui/material/styles';
 
 import { fToNow } from 'src/utils/format-time';
 
@@ -32,7 +33,7 @@ export default function ContactsPopover() {
         onClick={popover.onOpen}
         sx={{
           ...(popover.open && {
-            bgcolor: (theme) => theme.palette.action.selected,
+            bgcolor: (theme: Theme) => theme.palette.action.selected,
           }),
         }}
       >

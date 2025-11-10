@@ -5,7 +5,7 @@ import Step from '@mui/material/Step';
 import Stepper from '@mui/material/Stepper';
 import StepLabel from '@mui/material/StepLabel';
 
-import { useTranslate } from 'src/locales';
+import { useTranslations } from 'next-intl';
 
 const steps = [
   'Refused',
@@ -17,7 +17,7 @@ const steps = [
 ];
 
 export default function HorizontalStepper({ activeStep }: { activeStep: string }) {
-  const { t } = useTranslate();
+  const t = useTranslations();
   const activeStepIndex = steps.indexOf(activeStep);
 
   return (

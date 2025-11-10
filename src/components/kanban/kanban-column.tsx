@@ -2,7 +2,7 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { Box, Badge, Typography } from '@mui/material';
 
-import { useTranslate } from 'src/locales';
+import { useTranslations } from 'next-intl';
 
 import { useSnackbar } from 'src/components/snackbar';
 
@@ -20,7 +20,7 @@ type Props = {
 
 export default function KanbanColumn({ column, tasks, index }: Props) {
   const { enqueueSnackbar } = useSnackbar();
-  const { t } = useTranslate();
+  const t = useTranslations();
 
   return (
     <Paper
@@ -32,13 +32,12 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
         overflowY: 'auto',
         overflowX: 'hidden',
         minWidth: 'fit-content',
-        
+
         scrollbarWidth: 'none', // Hide the scrollbar for firefox
         '&::-webkit-scrollbar': {
           display: 'none', // Hide the scrollbar for WebKit browsers (Chrome, Safari, Edge, etc.)
         },
       }}
-      
     >
       <Stack>
         <Stack
@@ -59,7 +58,7 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
               borderColor: 'transparent',
             }}
           >
-            {!(typeof column?.name === "string") ?  column?.name.toDateString() : column?.name}
+            {!(typeof column?.name === 'string') ? column?.name.toDateString() : column?.name}
           </Typography>
 
           <Badge sx={{ px: 1 }} badgeContent={7} color="primary" />
@@ -73,12 +72,17 @@ export default function KanbanColumn({ column, tasks, index }: Props) {
               width: { xs: 325, sm: 400 },
             }}
           >
-            {column.taskIds?.length ? tasks
-              .filter((task) => column?.taskIds.includes(task.id))
-              ?.map((task, taskIndex) => (
-                <KanbanTaskItem key={task?.id} index={taskIndex} task={task} />
-              )):
-             <Typography variant="body1" sx={{textAlign:"center",p:2}}>{t("There Are No Orders")}</Typography> }
+            {column.taskIds?.length ? (
+              tasks
+                .filter((task) => column?.taskIds.includes(task.id))
+                ?.map((task, taskIndex) => (
+                  <KanbanTaskItem key={task?.id} index={taskIndex} task={task} />
+                ))
+            ) : (
+              <Typography variant="body1" sx={{ textAlign: 'center', p: 2 }}>
+                {t('There Are No Orders')}
+              </Typography>
+            )}
           </Stack>
         </Box>
       </Stack>

@@ -2,8 +2,6 @@ import Box from '@mui/material/Box';
 
 import { usePathname } from 'src/routes/hooks';
 
-import Header from './header';
-
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -17,20 +15,17 @@ export default function MainLayout({ children }: Props) {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: 1 }}>
-      <Header />
-
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           ...(!homePage && {
-            pt: { xs: 8, md: 10 },
+            pt: { xs: 2, md: 3 },
           }),
         }}
       >
         {children}
       </Box>
-
     </Box>
   );
 }
