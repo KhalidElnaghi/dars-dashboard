@@ -1,7 +1,7 @@
 import ModernNewPasswordView from 'src/sections/auth/jwt/modern-new-password-view';
 
 export const metadata = {
-  title: 'Auth Modern: New Password',
+  title: 'New Password',
 };
 interface IProps {
   searchParams: Promise<{ email: string }>;
