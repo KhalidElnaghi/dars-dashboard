@@ -50,6 +50,8 @@
       "password_must_contain_at_least_one_special_character": "يجب أن تتكون كلمة المرور من حرف خاص واحد على الأقل"
     },
     "Success": {
+      "otp_sent": "تم إرسال رمز التحقق بنجاح",
+      "otp_verified": "تم التحقق من الرمز بنجاح",
       "code_resent": "تم إرسال رمز التحقق مرة أخرى",
       "password_reset": "تم تحديث كلمة المرور بنجاح"
     }

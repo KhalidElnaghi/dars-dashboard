@@ -53,18 +53,19 @@ export default function ModernForgotPasswordView() {
     const mail = {
       email: data.email,
     };
-    // try {
-    // const res = await ForgetPassword(mail);
-    // if (res === 200) {
-    router.push(`/auth/jwt/new-password?email=${mail?.email}`);
-    // } else {
-    // enqueueSnackbar(typeof res === 'object' && 'error' in res ? res.error : 'Unknown error', {
-    // variant: 'error',
-    // });
-    // }
-    // } catch (erro) {
-    // enqueueSnackbar(`${erro}`, { variant: 'error' });
-    // }
+    try {
+      const res = await ForgetPassword(mail);
+      if (res === 200) {
+        enqueueSnackbar(t('Message.Success.otp_sent'), { variant: 'success' });
+        router.push(`/auth/jwt/new-password?email=${mail?.email}`);
+      } else {
+        enqueueSnackbar(typeof res === 'object' && 'error' in res ? res.error : 'Unknown error', {
+          variant: 'error',
+        });
+      }
+    } catch (erro) {
+      enqueueSnackbar(`${erro}`, { variant: 'error' });
+    }
   });
 
   const renderHead = (

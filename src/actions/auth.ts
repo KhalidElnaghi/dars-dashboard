@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { cookies } from 'next/headers';
 
-import axiosInstance, { endpoints, getErrorMessage, SharedApiClient } from 'src/utils/axios';
+import { endpoints, getErrorMessage, SharedApiClient } from 'src/utils/axios';
 
 import { HOST_API_SHARED } from 'src/config-global';
 
@@ -39,7 +39,7 @@ export const Register = async (data: {
 }) => {
   const lang = await getServerLanguage();
   try {
-    const res = await axiosInstance.post(`${endpoints.auth.register}`, data, {
+    const res = await SharedApiClient.post(`${endpoints.auth.register}`, data, {
       headers: {
         'Accept-Language': lang,
       },
@@ -55,7 +55,7 @@ export const Register = async (data: {
 export const ForgetPassword = async (data: { email: string }) => {
   const lang = await getServerLanguage();
   try {
-    const res = await axiosInstance.post(`${endpoints.auth.forgetPassword}`, data, {
+    const res = await SharedApiClient.post(`${endpoints.auth.forgetPassword}`, data, {
       headers: {
         'Accept-Language': lang,
       },
@@ -68,10 +68,26 @@ export const ForgetPassword = async (data: { email: string }) => {
   }
 };
 
-export const ResetPassword = async (data: { email: string; code: string; newPassword: string }) => {
+export const VerifyForgetPasswordOtp = async (data: { email: string; code: string }) => {
   const lang = await getServerLanguage();
   try {
-    const res = await axiosInstance.post(`${endpoints.auth.verifyforgetPassword}`, data, {
+    const res = await SharedApiClient.post(`${endpoints.auth.verifyForgetPasswordOtp}`, data, {
+      headers: {
+        'Accept-Language': lang,
+      },
+    });
+    return res?.status;
+  } catch (e) {
+    return {
+      error: getErrorMessage(e.error),
+    };
+  }
+};
+
+export const ResetPassword = async (data: { email: string; newPassword: string }) => {
+  const lang = await getServerLanguage();
+  try {
+    const res = await SharedApiClient.post(`${endpoints.auth.resetPasswordByEmail}`, data, {
       headers: {
         'Accept-Language': lang,
       },

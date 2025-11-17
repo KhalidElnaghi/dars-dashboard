@@ -26,7 +26,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFCode, RHFTextField } from 'src/components/hook-form';
-import { ForgetPassword, ResetPassword } from 'src/actions/auth';
+import { ForgetPassword, VerifyForgetPasswordOtp, ResetPassword } from 'src/actions/auth';
 import { useTranslations, useLocale } from 'next-intl';
 
 // ----------------------------------------------------------------------
@@ -86,22 +86,28 @@ export default function ModernNewPasswordView({ email }: IProps) {
   const [isResending, setIsResending] = useState(false);
 
   const onVerifyCode = handleCodeSubmit(async (data) => {
-    setVerificationCode(data.code);
-    setStep('reset');
+    try {
+      const res = await VerifyForgetPasswordOtp({ email, code: data.code });
+      if (res === 200) {
+        setVerificationCode(data.code);
+        setStep('reset');
+        enqueueSnackbar(t('Message.Success.otp_verified'), { variant: 'success' });
+      } else {
+        enqueueSnackbar(
+          typeof res === 'object' && 'error' in res ? res.error : t('Message.Error.unknown_error'),
+          {
+            variant: 'error',
+          }
+        );
+      }
+    } catch (erro) {
+      enqueueSnackbar(`${erro}`, { variant: 'error' });
+    }
   });
 
   const onSubmitPassword = handlePasswordSubmit(async (data) => {
-    const code = verificationCode || codeMethods.getValues('code');
-
-    if (!code) {
-      enqueueSnackbar(t('Message.Error.code_required'), { variant: 'error' });
-      setStep('verify');
-      return;
-    }
-
     const resetPass = {
       email,
-      code,
       newPassword: data.password,
     };
     try {

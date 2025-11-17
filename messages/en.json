@@ -50,6 +50,8 @@
       "password_must_contain_at_least_one_special_character": "Password must contain at least one special character"
     },
     "Success": {
+      "otp_sent": "Verification code sent successfully",
+      "otp_verified": "Code verified successfully",
       "code_resent": "Verification code sent again",
       "password_reset": "Password updated successfully"
     }

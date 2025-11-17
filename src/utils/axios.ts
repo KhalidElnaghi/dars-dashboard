@@ -118,8 +118,9 @@ export const endpoints = {
   auth: {
     login: '/auth/email-login',
     register: '/users/register',
-    forgetPassword: '/users/request-forget-password',
-    verifyforgetPassword: '/users/verify-forget-password',
+    forgetPassword: '/auth/forget-password-by-email',
+    verifyForgetPasswordOtp: '/auth/verify-forget-password-otp',
+    resetPasswordByEmail: '/auth/reset-password-by-email',
     verifyOtpLogin: '/users/verify-phone-login',
     sendQuestions: '/users/questions',
   },
