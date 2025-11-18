@@ -3,7 +3,8 @@
 import axios from 'axios';
 import { cookies } from 'next/headers';
 
-import { endpoints, getErrorMessage, SharedApiClient } from 'src/utils/axios';
+import { getErrorMessage, SharedApiClient } from 'src/utils/axios';
+import { endpoints } from 'src/utils/endpoints';
 
 import { HOST_API_SHARED } from 'src/config-global';
 
@@ -100,21 +101,6 @@ export const ResetPassword = async (data: { email: string; newPassword: string }
   }
 };
 
-export const VerifyOtpLogin = async (data: { phone: string; code: string }) => {
-  const lang = await getServerLanguage();
-  try {
-    const res = await SharedApiClient.post(`${endpoints.auth.verifyOtpLogin}`, data, {
-      headers: {
-        'Accept-Language': lang,
-      },
-    });
-    return res?.data;
-  } catch (e) {
-    return {
-      error: getErrorMessage(e.error),
-    };
-  }
-};
 
 export const RefreshToken = async () => {
   const lang = await getServerLanguage();

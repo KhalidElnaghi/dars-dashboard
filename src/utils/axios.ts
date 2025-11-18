@@ -113,15 +113,3 @@ export const getErrorMessage = (error: any): string => {
   const first = candidates.find((m) => m && m.length > 0);
   return first || 'Something went wrong';
 };
-
-export const endpoints = {
-  auth: {
-    login: '/auth/email-login',
-    register: '/users/register',
-    forgetPassword: '/auth/forget-password-by-email',
-    verifyForgetPasswordOtp: '/auth/verify-forget-password-otp',
-    resetPasswordByEmail: '/auth/reset-password-by-email',
-    verifyOtpLogin: '/users/verify-phone-login',
-    sendQuestions: '/users/questions',
-  },
-};

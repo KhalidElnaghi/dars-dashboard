@@ -7,8 +7,6 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 
-import { useTranslate } from 'src/locales';
-
 import Scrollbar from 'src/components/scrollbar';
 
 import useTable from './use-table';
@@ -30,11 +28,13 @@ export default function SharedTable<T extends { id: string | number }>({
 }: SharedTableProps<T>) {
   const table = useTable();
   const searchParams = useSearchParams();
-  const { t } = useTranslate();
-  const hasPage = searchParams.get('page');
+  const maxResultCountParam = searchParams.get('MaxResultCount') || searchParams.get('limit');
+  const skipCountParam = searchParams.get('SkipCount');
 
-  const page = hasPage ? Number(searchParams.get('page')) - 1 : 0;
-  const limit = Number(searchParams.get('limit')) || 10;
+  const limit = Number(maxResultCountParam) || 10;
+  const skipCount = Number(skipCountParam) || 0;
+  const page = skipCountParam ? Math.floor(skipCount / limit) : Math.max((Number(searchParams.get('page')) || 1) - 1, 0);
+
   return (
     <Box>
       <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
@@ -73,7 +73,7 @@ export default function SharedTable<T extends { id: string | number }>({
           >
             {/* Inject auto "No" column at the beginning */}
             <TableHeadCustom
-              headLabel={[{ id: 'auto_index', label: t('LABEL.NO'), width: 25 }, ...tableHead]}
+              headLabel={[{ id: 'auto_index', label: 'Label.no', width: 25 }, ...tableHead]}
               headColor={headColor}
             />
 
@@ -108,6 +108,7 @@ export default function SharedTable<T extends { id: string | number }>({
           page={page}
           rowsPerPage={limit}
           onPageChange={table.onChangePage!}
+          onRowsPerPageChange={table.onChangeRowsPerPage}
         />
       )}
     </Box>

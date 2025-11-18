@@ -13,7 +13,7 @@ const icon = (name: string) => (
 );
 
 const ICONS = {
-  main: icon('ic_main'),
+  home: icon('home'),
   orders: icon('ic_orders'),
   notifications: icon('ic_notifications'),
   reports: icon('ic_reports'),
@@ -43,6 +43,7 @@ const ICONS = {
   app: icon('mobile'),
   transactions: icon('ic_currencies'),
   dashboard: icon('icons8-home'),
+  countries: icon('countries'),
 };
 
 export function useNavData() {
@@ -50,7 +51,14 @@ export function useNavData() {
   const data = useMemo(
     () => [
       {
-        items: [{ title: t('Nav.main'), path: paths.dashboard.root, icon: ICONS.dashboard }],
+        items: [
+          { title: t('Nav.main'), path: paths.dashboard.root, icon: ICONS.home },
+          {
+            title: t('Nav.countries_and_cities'),
+            path: paths.dashboard.countries,
+            icon: ICONS.countries,
+          },
+        ],
       },
     ],
     [t]

@@ -51,7 +51,7 @@ export type TableProps = {
   onSelectAllRows: (checked: boolean, newSelecteds: string[]) => void;
   //
   onChangePage: (event: unknown, newPage: number) => void;
-  onChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeRowsPerPage: (newRowsPerPage: number) => void;
   onChangeDense: (event: React.ChangeEvent<HTMLInputElement>) => void;
   //
   setDense: React.Dispatch<React.SetStateAction<boolean>>;

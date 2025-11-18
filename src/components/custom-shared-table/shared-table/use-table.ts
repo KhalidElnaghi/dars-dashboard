@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 import { TableProps } from './types';
 
@@ -13,29 +14,34 @@ export type UseTableProps = {
 
 export default function useTable(props?: UseTableProps): Partial<ReturnType> {
   const [dense, setDense] = useState(!!props?.defaultDense);
+  const searchParams = useSearchParams();
+  const querySignature = searchParams.toString();
   const { createQueryString } = useQueryString();
+
+  const currentLimit = Number(searchParams.get('MaxResultCount')) || 10;
 
   const onChangeDense = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setDense(event.target.checked);
   }, []);
   const onChangeRowsPerPage = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newLimit = event.target.value;
-      createQueryString([{ name: 'limit', value: newLimit }]);
+    (newLimit: number) => {
+      createQueryString([
+        { name: 'MaxResultCount', value: String(newLimit) },
+        { name: 'SkipCount', value: '0' },
+      ]);
     },
     [createQueryString]
   );
 
   const onChangePage = useCallback(
     (event: unknown, newPage: number) => {
+      const params = new URLSearchParams(querySignature);
+      const limit = Number(params.get('MaxResultCount')) || currentLimit;
       createQueryString([
-        {
-          name: 'page',
-          value: String(newPage + 1),
-        },
+        { name: 'SkipCount', value: String(newPage * limit) },
       ]);
     },
-    [createQueryString]
+    [createQueryString, currentLimit, querySignature]
   );
 
   return {

@@ -27,7 +27,7 @@ export default function ConfirmDialog({
   return (
     <Dialog fullWidth maxWidth="xs" open={open} onClose={onClose} {...other}>
       <CloseButton onClose={onClose} />
-      <DialogTitle sx={{ pb: 0.5 }}>{title || t('Delete')}</DialogTitle>
+      <DialogTitle sx={{ pb: 0.5 }}>{title || t('Dialog.Delete')}</DialogTitle>
 
       <DialogContent
         sx={{
@@ -41,17 +41,17 @@ export default function ConfirmDialog({
           ) : (
             <Typography variant="body1" color="disabled">
               {' '}
-              {t('delete_confirm')}{' '}
+              {t('Dialog.delete_confirm_generic')}{' '}
             </Typography>
           )}
         </Box>
       </DialogContent>
       <DialogActions>
         <Button variant="contained" color={buttonColor || 'error'} onClick={handleConfirmDelete}>
-          {typeof buttonTitle === 'string' ? buttonTitle : t('Delete')}
+          {typeof buttonTitle === 'string' ? buttonTitle : t('Dialog.Delete')}
         </Button>
         <Button variant="outlined" color="inherit" onClick={onClose}>
-          {t('Cancel')}
+          {t('Dialog.Cancel')}
         </Button>
       </DialogActions>
     </Dialog>

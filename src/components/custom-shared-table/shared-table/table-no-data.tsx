@@ -22,7 +22,7 @@ export default function TableNoData({ notFound, sx, colSpan = 12, iconUrl }: Pro
         <TableCell colSpan={colSpan}>
           <EmptyContent
             filled
-            title={t('LABEL.NO_DATA')}
+            title={t('Label.no_data')}
             imgUrl={iconUrl}
             sx={{
               py: 10,
