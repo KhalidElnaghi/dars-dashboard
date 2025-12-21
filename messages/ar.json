@@ -2,16 +2,21 @@
   "Metadata": {
     "Login": {
       "title": "تسجيل الدخول"
-    }
+    },
+    "countries_and_cities": "الدول والمدن"
   },
   "Nav": {
-    "main": "الرئيسية"
+    "main": "الرئيسية",
+    "countries_and_cities": "الدول والمدن"
   },
   "Title": {
     "dars": "درس",
     "sign_in": "تسجيل الدخول",
     "verify_email": "يرجى التحقق من بريدك الإلكتروني!",
-    "reset_password": "تعيين كلمة مرور جديدة"
+    "reset_password": "تعيين كلمة مرور جديدة",
+    "add": "إضافة {item}",
+    "edit": "تعديل {item}",
+    "delete": "حذف {item}"
   },
   "Label": {
     "forgot_password": "نسيت كلمة المرور؟",
@@ -24,19 +29,49 @@
     "enter_code_again": "إدخال رمز مختلف",
     "logout": "تسجيل الخروج",
     "password": "كلمة المرور",
-    "email": "البريد الإلكتروني"
+    "email": "البريد الإلكتروني",
+    "no_data": "لا يوجد بيانات",
+    "page": "الصفحة",
+    "of": "من",
+    "no": "الرقم",
+    "countries": "الدول",
+    "country": "دولة",
+    "name_ar": "اسم الدولة بالعربية",
+    "name_en": "اسم الدولة بالإنجليزية",
+    "is_active": "مفعل",
+    "status": "الحالة",
+    "actions": "الإجراءات",
+    "search": "ابحث باسم الدولة",
+    "all_statuses": "كل الحالات",
+    "active": "مفعل",
+    "inactive": "غير مفعل",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "deleting": "جارٍ الحذف...",
+    "results_per_page": "النتائج للصفحة الواحدة"
   },
   "Button": {
     "send_request": "إرسال",
     "update_password": "تحديث كلمة المرور",
     "resend_code": "إعادة إرسال الرمز",
     "verify_code": "تحقق من الرمز",
-    "sign_in": "تسجيل الدخول"
+    "sign_in": "تسجيل الدخول",
+    "add": "إضافة",
+    "cancel": "إلغاء",
+    "create": "حفظ",
+    "save_changes": "حفظ التغييرات",
+    "delete": "حذف"
   },
-  "Form": {},
+  "Dialog": {
+    "delete_confirm": "هل أنت متأكد من حذف {item}؟",
+    "delete_confirm_generic": "هل أنت متأكد من حذف هذا العنصر؟",
+    "Delete": "حذف",
+    "Cancel": "إلغاء"
+  },
   "Message": {
     "Error": {
       "unknown_error": "خطأ غير معروف",
+      "something_went_wrong": "حدث خطأ ما",
       "code_required": "رمز التحقق مطلوب",
       "code_length": "يجب أن يتكون الرمز من 4 أرقام",
       "password_min": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
@@ -47,11 +82,20 @@
       "password_must_contain_at_least_one_digit": "يجب أن تتكون كلمة المرور من رقم واحد على الأقل",
       "password_must_contain_at_least_one_lowercase_letter": "يجب أن تتكون كلمة المرور من حرف صغير واحد على الأقل",
       "password_must_contain_at_least_one_uppercase_letter": "يجب أن تتكون كلمة المرور من حرف كبير واحد على الأقل",
-      "password_must_contain_at_least_one_special_character": "يجب أن تتكون كلمة المرور من حرف خاص واحد على الأقل"
+      "password_must_contain_at_least_one_special_character": "يجب أن تتكون كلمة المرور من حرف خاص واحد على الأقل",
+      "name_ar_required": "اسم الدولة بالعربية مطلوب",
+      "name_en_required": "اسم الدولة بالإنجليزية مطلوب"
     },
     "Success": {
+      "otp_sent": "تم إرسال رمز التحقق بنجاح",
+      "otp_verified": "تم التحقق من الرمز بنجاح",
       "code_resent": "تم إرسال رمز التحقق مرة أخرى",
-      "password_reset": "تم تحديث كلمة المرور بنجاح"
+      "password_reset": "تم تحديث كلمة المرور بنجاح",
+      "created": "تم إنشاء {item} بنجاح",
+      "updated": "تم تحديث {item} بنجاح",
+      "deleted": "تم حذف {item} بنجاح",
+      "activated": "تم تفعيل {item} بنجاح",
+      "deactivated": "تم إلغاء تفعيل {item} بنجاح"
     }
   },
   "Placeholder": {
@@ -62,6 +106,7 @@
     "verify_email_line1": "لقد أرسلنا رمز تأكيد مكوّنًا من 4 أرقام إلى {email}.",
     "verify_email_line2": "يرجى إدخال الرمز في الحقول أدناه للتحقق من بريدك الإلكتروني.",
     "no_code": "لم تتلقَّ رمزًا؟",
-    "reset_password": "يرجى إدخال كلمة المرور الجديدة أدناه."
+    "reset_password": "يرجى إدخال كلمة المرور الجديدة أدناه.",
+    "countries": "إدارة الدول المتاحة وحالة تفعيلها."
   }
 }

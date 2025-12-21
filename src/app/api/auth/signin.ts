@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { fetcher, endpoints } from '../../../utils/axios';
+import { fetcher } from '../../../utils/axios';
+import { endpoints } from '../../../utils/endpoints';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {

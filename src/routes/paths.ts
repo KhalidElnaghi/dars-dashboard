@@ -140,5 +140,6 @@ export const paths = {
         edit: `${ROOTS.DASHBOARD}/cities-and-areas/areas/edit`,
       },
     },
+    countries: `${ROOTS.DASHBOARD}/countries`,
   },
 };

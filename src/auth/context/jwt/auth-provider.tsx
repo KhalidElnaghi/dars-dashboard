@@ -6,10 +6,11 @@ import axios from 'axios';
 import Cookie from 'js-cookie';
 import { useMemo, useEffect, useReducer, useCallback } from 'react';
 
-import { endpoints, getErrorMessage } from 'src/utils/axios';
+import { getErrorMessage } from 'src/utils/axios';
+import { endpoints } from 'src/utils/endpoints';
 
 import { IUser } from 'src/@types/user';
-import { RefreshToken, LoginWithEmail, VerifyOtpLogin } from 'src/actions/auth';
+import { RefreshToken, LoginWithEmail } from 'src/actions/auth';
 
 import { AuthContext } from './auth-context';
 import { setSession, isValidToken } from './utils';
@@ -193,52 +194,7 @@ export function AuthProvider({ children }: Readonly<Props>) {
       };
     }
   }, []);
-  const loginWithPhone = useCallback(async (phone: string, code: string) => {
-    const credentials = {
-      phone,
-      code,
-    };
-    try {
-      const res = await VerifyOtpLogin(credentials);
-      if (!res?.error) {
-        const {
-          accessToken,
-          refreshToken,
-          accessTokenExpireAt,
-          refreshTokenExpireAt,
-          name,
-          id,
-          email,
-          phoneNumber,
-          role,
-          completeTeacherProfile,
-        } = res;
-        setSession({ accessToken, refreshToken, accessTokenExpireAt, refreshTokenExpireAt });
-        sessionStorage.setItem(USER_KEY, JSON.stringify(res));
-        Cookie.set(USER_KEY, name ?? '');
-        dispatch({
-          type: Types.LOGIN,
-          payload: {
-            user: {
-              id,
-              name,
-              email,
-              phoneNumber,
-              role,
-              completeTeacherProfile,
-              accessToken,
-            },
-          },
-        });
-      } else {
-        return res;
-      }
-    } catch (error) {
-      return {
-        error: getErrorMessage(error.error),
-      };
-    }
-  }, []);
+
   const register = useCallback(
     async (email: string, password: string, firstName: string, lastName: string) => {
       const data = {
@@ -295,13 +251,11 @@ export function AuthProvider({ children }: Readonly<Props>) {
       loading: status === 'loading',
       authenticated: status === 'authenticated',
       unauthenticated: status === 'unauthenticated',
-      //
       login,
       register,
       logout,
-      loginWithPhone,
     }),
-    [login, logout, register, state.user, status, loginWithPhone]
+    [login, logout, register, state.user, status]
   );
 
   return <AuthContext.Provider value={memoizedValue}>{children}</AuthContext.Provider>;
